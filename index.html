@@ -28,7 +28,7 @@
 			<ul>
 				<li><a href="index.html" class="current">Welcome</a></li>
 				<li><a href="gallery.html">Register</a></li>
-				<li><a href="news.html">Login</a></li>
+				<li onclick="gameClick()"><a>Game</a></li>
 				<li><a href="blog.html">setting</a></li>
 				<li><a href="contact.html">About</a></li>
 				<li><h4>Iris Dreizenshtok-315790410 , Chen Avraham-205859655</h4></li>
@@ -183,6 +183,17 @@
 			document.getElementByID('welcomeMessage').innerHTML = "Welcome " + username + "!";
 		} else
 			document.getElementById('welcomeMessage').innerHTML = "Hello!";
+	}
+
+	function gameClick() {
+		var welcomeDiv = document.getElementById('welcome');
+		if (welcomeDiv.style.display === 'none') {
+			welcomeDiv.style.display = 'block';
+		} else {
+			welcomeDiv.style.display = 'none';
+			var y = document.getElementById('game');
+			y.style.display='block'
+		}
 	}
 
 </script>
