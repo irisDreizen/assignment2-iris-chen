@@ -112,16 +112,23 @@
 				<div align="center" id="register" style="display: none">
 				<div class="popup">
 					<h2>Register</h2>
+					<br/>
 					<p>Please enter your details here</p>
+					<br/>
 					<div>
 						<label >Login (Username)</label>
 						<input type="text" id="username_register" value="" />
 					</div>
+					<br/>
 					<div>
 						<label>Password</label>
 						<input type="password" id="password_register" value="" />
 					</div>
+					<br/>
 					<button onclick="store()" >Sign up </button>
+					<br/>
+					<br/>
+					<br/>
 				</div>
 			</div>
 
@@ -167,22 +174,61 @@
 
 	//function to store user name and password
 	function store () {
-		var inputUsername= document.getElementById("username_register");
-		var inputPassword= document.getElementById("password_register");
-		localStorage.setItem("username", inputUsername.value);
-		localStorage.setItem("password", inputPassword.value);
-		alert("successful registered")
+		let inputUsername = document.getElementById("username_register") ;
+		let inputPassword = document.getElementById("password_register");
+		if(inputUsername!= null){
+			if(inputPassword!=null) {
+				if (localStorage.getItem(inputUsername.value) === null) {
+					localStorage.setItem(inputUsername.value, inputPassword.value);
+					alert("successful registration")
+				}
+				else{
+					if(localStorage.getItem(inputUsername.value)===inputPassword.value){
+						alert("you are already registered")
+					}
+					else{
+						alert("this user name is already in use, please try another name")
+					}
+
+				}
+			}
+			else{
+				alert("wrong arguments")
+			}
+		}
+		else{
+			alert("wrong arguments")
+		}
+
+
 	};
 
 	//function to sign in
 	function login() {
-		var inputUsername = localStorage.getItem("username_login");
-		var inputPassword = localStorage.getItem("password_login");
-		if (username != "undefined" || username != "null" || password != "undefined" || password !="null")
-		{
-			document.getElementByID('welcomeMessage').innerHTML = "Welcome " + username + "!";
-		} else
-			document.getElementById('welcomeMessage').innerHTML = "Hello!";
+		let inputUsername = document.getElementById("username_login") ;
+		let inputPassword = document.getElementById("password_login");
+		if ( inputUsername.value != null){
+			if(inputPassword.value !=null){
+				if(localStorage.getItem(inputUsername.value)!=null){
+					if(localStorage.getItem(inputUsername.value)===inputPassword.value){
+						alert("successfully signed in")
+					}
+					else{
+						alert("you don't have an account, please register")
+					}
+				}
+				else{
+					alert("you don't have an account, please register")
+				}
+			}
+			else{
+				alert("wrong arguments")
+			}
+		}
+		else{
+			alert("wrong arguments")
+		}
+
 	}
 
 	function gameClick() {
