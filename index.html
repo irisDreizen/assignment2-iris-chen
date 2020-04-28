@@ -16,6 +16,7 @@
 	</script>
 	<script src="./jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="./app.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 </head>
 <body>
@@ -115,20 +116,37 @@
 					<br/>
 					<p>Please enter your details here</p>
 					<br/>
+					<form action="" name="registration">
 					<div>
-						<label >Login (Username)</label>
-						<input type="text" id="username_register" value="" />
+						<label for="username_register">Login (Username)</label>
+						<input type="text" id="username_register" name="username_register1" value="" />
 					</div>
 					<br/>
 					<div>
-						<label>Password</label>
-						<input type="password" id="password_register" value="" />
+						<label for="password_register">Password</label>
+						<input type="password" id="password_register" name="password_register1" value="" />
 					</div>
 					<br/>
-					<button onclick="store()" >Sign up </button>
+					<div>
+						<label for="fullName_register">Full Name</label>
+						<input type="text" id="fullName_register" name="fullName_register1" value="" />
+					</div>
+					<br/>
+					<div>
+						<label for="email_register">Email</label>
+						<input type="email" id="email_register" name="email_register1" value="" />
+					</div>
+					<br/>
+					<div>
+						<label for="birthdayDate_register">Birthday Date</label>
+						<input type="date" id="birthdayDate_register" name="birthdayDate_register1" value="" />
+					</div>
+					<br/>
+					<button id="registerButton" type="submit" value="validate">Sign up </button>
 					<br/>
 					<br/>
 					<br/>
+					</form>
 				</div>
 			</div>
 
@@ -150,7 +168,100 @@
 	</div> <!-- end of tooplate_footer -->
 
 </div><!-- end of wrapper -->
+
 <script>
+	$(document).ready(function () {
+		jQuery.validator.addMethod("ContainsAtLeastOneDigit", function (value) {
+			return /^[a-z]+[0-9]/i.test(value);
+		}, 'Your input must contain at least 1 letter and 1 number');
+	})
+
+		// Initialize form validation on the registration form.
+		// It has the name attribute "registration"
+		$("form[name='registration']").validate({
+			// Specify validation rules
+			rules: {
+				// The key name on the left side is the name attribute
+				// of an input field. Validation rules are defined
+				// on the right side
+				username_register1: {
+					required: true,
+				},
+				password_register1: {
+					required: true,
+					minlength: 6,
+					ContainsAtLeastOneDigit: true
+				},
+				fullName_register1: "required",
+				email_register1: {
+					required: true,
+					// Specify that email should be validated
+					// by the built-in "email" rule
+					email: true
+				},
+				birthdayDate_register1:"required"
+			},
+			// Specify validation error messages
+			messages: {
+				username_register1: "Please enter user name",
+				password_register1: {
+					required: "Please provide a password",
+					minlength: "Your password must be at least 6 characters long"
+				},
+				fullName_register1: "Please enter your full name",
+				email_register1: "Please enter a valid email address",
+				birthdayDate_register1:"Please enter your birthday date"
+			},
+			// Make sure the form is submitted to the destination defined
+			// in the "action" attribute of the form when valid
+			submitHandler: function() {
+				store();
+			}
+		});
+
+		$("#registerButton").on('click', function () {
+			let regex='/\d/';
+			let username = document.getElementById('username_register');
+			let password = document.getElementById('password_register');
+			let fullName=document.getElementById('fullName_register');
+			let email=document.getElementById('email_register');
+			let birthdayDate=document.getElementById('birthdayDate_register');
+			console.log("1")
+			if(!username.value){
+				alert("you didn't fill user name");
+				console.log("2")
+			}
+			else if(!password.value){
+				alert("you didn't fill password");
+			}
+			else if(!fullName.value){
+				alert("you didn't fill full name");
+			}
+			else if(!email.value){
+				alert("you didn't fill email");
+			}
+			else if(!birthdayDate.value){
+				alert("you didn't fill birthday date");
+			}
+			else{
+				if(!password.value.match(/(?=.*\d)(?=.*[A-Za-z]).{6,}/)){
+					alert("your password is not valid. it must have at least 6 characters, one letter and one digit")
+				}
+				else if(!isNaN(fullName.value)){
+					console.log(fullName.value)
+					alert("you full name can't include digits")
+				}
+				else if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))){
+					alert("your email is not valid");
+				}
+				else{
+					console.log("3")
+					store();
+				}
+			}
+		});
+
+
 	function loginFunction() {
 		var x = document.getElementById('welcome');
 		if (x.style.display === 'none') {
@@ -212,6 +323,14 @@
 				if(localStorage.getItem(inputUsername.value)!=null){
 					if(localStorage.getItem(inputUsername.value)===inputPassword.value){
 						alert("successfully signed in")
+						var x = document.getElementById('login');
+						if (x.style.display === 'none') {
+							x.style.display = 'block';
+						} else {
+							x.style.display = 'none';
+							var y = document.getElementById('game');
+							y.style.display='block'
+						}
 					}
 					else{
 						alert("you don't have an account, please register")
