@@ -125,7 +125,22 @@
 						<input type="password" id="password_register" value="" />
 					</div>
 					<br/>
-					<button onclick="store()" >Sign up </button>
+					<div>
+						<label>Full Name</label>
+						<input type="text" id="fullName_register" value="" />
+					</div>
+					<br/>
+					<div>
+						<label>Email</label>
+						<input type="email" id="email_register" value="" />
+					</div>
+					<br/>
+					<div>
+						<label>Birthday Date</label>
+						<input type="date" id="birthdayDate_register" value="" />
+					</div>
+					<br/>
+					<button id="registerButton" >Sign up </button>
 					<br/>
 					<br/>
 					<br/>
@@ -150,7 +165,51 @@
 	</div> <!-- end of tooplate_footer -->
 
 </div><!-- end of wrapper -->
+
 <script>
+		$("#registerButton").on('click', function () {
+			let regex='/\d/';
+			let username = document.getElementById('username_register');
+			let password = document.getElementById('password_register');
+			let fullName=document.getElementById('fullName_register');
+			let email=document.getElementById('email_register');
+			let birthdayDate=document.getElementById('birthdayDate_register');
+			console.log("1")
+			if(!username.value){
+				alert("you didn't fill user name");
+				console.log("2")
+			}
+			else if(!password.value){
+				alert("you didn't fill password");
+			}
+			else if(!fullName.value){
+				alert("you didn't fill full name");
+			}
+			else if(!email.value){
+				alert("you didn't fill email");
+			}
+			else if(!birthdayDate.value){
+				alert("you didn't fill birthday date");
+			}
+			else{
+				if(!password.value.match(/(?=.*\d)(?=.*[A-Za-z]).{6,}/)){
+					alert("your password is not valid. it must have at least 6 characters, one letter and one digit")
+				}
+				else if(!isNaN(fullName.value)){
+					console.log(fullName.value)
+					alert("you full name can't include digits")
+				}
+				else if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))){
+					alert("your email is not valid");
+				}
+				else{
+					console.log("3")
+					store();
+				}
+			}
+		});
+
+
 	function loginFunction() {
 		var x = document.getElementById('welcome');
 		if (x.style.display === 'none') {
@@ -212,6 +271,14 @@
 				if(localStorage.getItem(inputUsername.value)!=null){
 					if(localStorage.getItem(inputUsername.value)===inputPassword.value){
 						alert("successfully signed in")
+						var x = document.getElementById('login');
+						if (x.style.display === 'none') {
+							x.style.display = 'block';
+						} else {
+							x.style.display = 'none';
+							var y = document.getElementById('game');
+							y.style.display='block'
+						}
 					}
 					else{
 						alert("you don't have an account, please register")
