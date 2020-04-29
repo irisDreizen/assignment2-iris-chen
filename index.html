@@ -30,8 +30,8 @@
 				<li><a href="index.html" class="current">Welcome</a></li>
 				<li><a href="gallery.html">Register</a></li>
 				<li onclick="gameClick()"><a>Game</a></li>
-				<li><a href="blog.html">setting</a></li>
-				<li><a href="contact.html">About</a></li>
+				<li onclick="settingClick()"><a>Setting</a></li>
+				<li><a id="about">About</a></li>
 				<li><h4>Iris Dreizenshtok-315790410 , Chen Avraham-205859655</h4></li>
 
 			</ul>
@@ -150,6 +150,53 @@
 				</div>
 			</div>
 
+				<!-- The Modal -->
+				<div id="myModal" class="modal">
+
+					<!-- Modal content -->
+					<div class="modal-content">
+						<span class="close1">&times;</span>
+						<p class="aboutParagraph">created by: Iris Dreizenshtok & Chen Avraham</p>
+						<p class="aboutParagraph">this work is part of second assignment in Web Development Enviroment course. As part of building thos website we used Validate Plugin of JQuery. In Addition, we used a design template. </p>
+						<p class="aboutParagraph">the difficulties in this assignment were to understand how the plugin works and how to match it to our use</p>
+
+					</div>
+
+				</div>
+
+				<div id="setting" style="display: none">
+					<label for="upTarget">please enter a key of your up move:</label>
+					<input id="upTarget" type="text">
+					<br>
+					<br>
+					<label for="downTarget">please enter a key of your down move:</label>
+					<input id="downTarget" type="text">
+					<br>
+					<br>
+					<label for="leftTarget">please enter a key of your left move:</label>
+					<input id="leftTarget" type="text">
+					<br>
+					<br>
+					<label for="rightTarget">please enter a key of your right move:</label>
+					<input id="rightTarget" type="text">
+					<br>
+					<br>
+					<label for="numOfBalls">please enter number of balls:</label>
+					<input id="numOfBalls" type="text">
+					<br>
+					<br>
+					<label for="gameTime">please enter game time:</label>
+					<input id="gameTime" type="text">
+					<br>
+					<br>
+					<label for="numOfMonsters">please enter number of monsters:</label>
+					<input id="numOfMonsters" type="text">
+					<br>
+					<br>
+					<button>update</button>        <button>random values</button>
+					<br>
+					<br>
+				</div>
 
 
 			</div>
@@ -170,10 +217,56 @@
 </div><!-- end of wrapper -->
 
 <script>
+	let upKey=38;
+	let downKey=40;
+	let leftKey=37;
+	let rightKey=39;
+	$("#upTarget").keydown(function (event) {
+		upKey=event.keyCode;
+		alert("the key you chose:"+event.key)
+	})
+	$("#downTarget").keydown(function (event) {
+		downKey=event.keyCode;
+		alert("the key you chose:"+event.key)
+	})
+	$("#leftTarget").keydown(function (event) {
+		downKey=event.keyCode;
+		alert("the key you chose:"+event.key)
+	})
+	$("#rightTarget").keydown(function (event) {
+		downKey=event.keyCode;
+		alert("the key you chose:"+event.key)
+	})
+
+	let modal = document.getElementById("myModal");
+
+	let btn = document.getElementById("about");
+
+	let span = document.getElementsByClassName("close1")[0];
+
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+
+
 	$(document).ready(function () {
 		jQuery.validator.addMethod("ContainsAtLeastOneDigit", function (value) {
 			return /^[a-z]+[0-9]/i.test(value);
 		}, 'Your input must contain at least 1 letter and 1 number');
+		jQuery.validator.addMethod("NoDigits", function (value) {
+			return /\b[^\d\W]+\b/i.test(value);
+		}, 'Your input cant contain digits');
 	})
 
 		// Initialize form validation on the registration form.
@@ -192,7 +285,10 @@
 					minlength: 6,
 					ContainsAtLeastOneDigit: true
 				},
-				fullName_register1: "required",
+				fullName_register1:{
+					required: true,
+					NoDigits: true
+				},
 				email_register1: {
 					required: true,
 					// Specify that email should be validated
@@ -208,7 +304,10 @@
 					required: "Please provide a password",
 					minlength: "Your password must be at least 6 characters long"
 				},
-				fullName_register1: "Please enter your full name",
+				fullName_register1:{
+					required: "Please enter your full name",
+					NoDigits: "Your input cant contain digits"
+				},
 				email_register1: "Please enter a valid email address",
 				birthdayDate_register1:"Please enter your birthday date"
 			},
@@ -219,47 +318,47 @@
 			}
 		});
 
-		$("#registerButton").on('click', function () {
-			let regex='/\d/';
-			let username = document.getElementById('username_register');
-			let password = document.getElementById('password_register');
-			let fullName=document.getElementById('fullName_register');
-			let email=document.getElementById('email_register');
-			let birthdayDate=document.getElementById('birthdayDate_register');
-			console.log("1")
-			if(!username.value){
-				alert("you didn't fill user name");
-				console.log("2")
-			}
-			else if(!password.value){
-				alert("you didn't fill password");
-			}
-			else if(!fullName.value){
-				alert("you didn't fill full name");
-			}
-			else if(!email.value){
-				alert("you didn't fill email");
-			}
-			else if(!birthdayDate.value){
-				alert("you didn't fill birthday date");
-			}
-			else{
-				if(!password.value.match(/(?=.*\d)(?=.*[A-Za-z]).{6,}/)){
-					alert("your password is not valid. it must have at least 6 characters, one letter and one digit")
-				}
-				else if(!isNaN(fullName.value)){
-					console.log(fullName.value)
-					alert("you full name can't include digits")
-				}
-				else if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))){
-					alert("your email is not valid");
-				}
-				else{
-					console.log("3")
-					store();
-				}
-			}
-		});
+		// $("#registerButton").on('click', function () {
+		// 	let regex='/\d/';
+		// 	let username = document.getElementById('username_register');
+		// 	let password = document.getElementById('password_register');
+		// 	let fullName=document.getElementById('fullName_register');
+		// 	let email=document.getElementById('email_register');
+		// 	let birthdayDate=document.getElementById('birthdayDate_register');
+		// 	console.log("1")
+		// 	if(!username.value){
+		// 		alert("you didn't fill user name");
+		// 		console.log("2")
+		// 	}
+		// 	else if(!password.value){
+		// 		alert("you didn't fill password");
+		// 	}
+		// 	else if(!fullName.value){
+		// 		alert("you didn't fill full name");
+		// 	}
+		// 	else if(!email.value){
+		// 		alert("you didn't fill email");
+		// 	}
+		// 	else if(!birthdayDate.value){
+		// 		alert("you didn't fill birthday date");
+		// 	}
+		// 	else{
+		// 		if(!password.value.match(/(?=.*\d)(?=.*[A-Za-z]).{6,}/)){
+		// 			alert("your password is not valid. it must have at least 6 characters, one letter and one digit")
+		// 		}
+		// 		else if(!isNaN(fullName.value)){
+		// 			console.log(fullName.value)
+		// 			alert("you full name can't include digits")
+		// 		}
+		// 		else if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))){
+		// 			alert("your email is not valid");
+		// 		}
+		// 		else{
+		// 			console.log("3")
+		// 			store();
+		// 		}
+		// 	}
+		// });
 
 
 	function loginFunction() {
@@ -357,6 +456,17 @@
 		} else {
 			welcomeDiv.style.display = 'none';
 			var y = document.getElementById('game');
+			y.style.display='block'
+		}
+	}
+	
+	function settingClick() {
+		var welcomeDiv = document.getElementById('welcome');
+		if (welcomeDiv.style.display === 'none') {
+			welcomeDiv.style.display = 'block';
+		} else {
+			welcomeDiv.style.display = 'none';
+			var y = document.getElementById('setting');
 			y.style.display='block'
 		}
 	}
