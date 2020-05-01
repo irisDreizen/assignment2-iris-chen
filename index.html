@@ -28,18 +28,19 @@
 		<div id="tooplate_menu">
 			<ul>
 				<li><a href="index.html" class="current">Welcome</a></li>
-				<li><a href="gallery.html">Register</a></li>
-				<li onclick="gameClick()"><a>Game</a></li>
+<!--				<li onclick="gameClick()"><a>Game</a></li>-->
 				<li onclick="settingClick()"><a>Setting</a></li>
+				<li onclick="loginClick()"><a>Login</a></li>
+				<li onclick="registerClick()"><a>Register</a></li>
 				<li><a id="about">About</a></li>
-				<li><h4>Iris Dreizenshtok-315790410 , Chen Avraham-205859655</h4></li>
+				<li><h4 >Iris Dreizenshtok-315790410 , Chen Avraham-205859655</h4></li>
 
 			</ul>
-
-			<div class="cleaner"></div>
 		</div> <!-- end of menu -->
 		<div class="logo_and_names">
-			<img class="logo" src="images/tooplate_logo.png" align="middle"/>
+			<br>
+			<br>
+			<img class="logo" src="images/tooplate_logo.png"/>
 		</div>
 
 	</div> <!-- end of header -->
@@ -50,59 +51,75 @@
 	<div id="tooplate_main">
 
 		<div id="tooplate_content">
-				<br>
-			</div>
 
-			<div id="content"> 
-				 
-				<div align="center" id="game" style="display: none">
-					<div align="center" class="card">
-						<div id="score">
-							<label for="lblScore">SCORE:</label>
-							<input id="lblScore" type="text" />
-						</div>
-						<br>
-						<div id="time" class="time">
-							<label for="lblTime">TIME:</label>
-							<input id="lblTime" type="text" />
-						</div>
-						<br>
+			<div align="center" id="game" style="display: none">
+					<div id="score">
+						<label for="lblScore">SCORE:</label>
+						<input id="lblScore" type="text" />
 					</div>
-					<canvas id="canvas" height="750" width="800"></canvas>
+					<br>
+					<div id="time" class="time">
+						<label for="lblTime">TIME:</label>
+						<input id="lblTime" type="text" />
+					</div>
+					<br>
+				<canvas id="canvas" height="950" width="1000"></canvas>
 			</div>
 
 
-				<div align="center" id="welcome">
-					<button class="button" onclick="registerFunction()"><span>Register</span></button>
+			<div align="center" id="welcome">
+				<div>
+					<br/>
+					<h1 class="welcome_title">welcome to</h1>
 					<br/>
 					<br/>
-					<br/>
-					<br/>
-					<button class="button" onclick="loginFunction()"><span>Login</span></button>
-					<br/>
-					<br/>
-					<br/>
-					<br/>
+					<h1 class="welcome_title"> PackWomen</h1>
 				</div>
+				<br/>
+				<img id="welcome_logo" src="images/tooplate_logo.png">
+				<br/>
+				<br/>
+				<button class="button" onclick="registerFunction()"><span>Register</span></button>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<button class="button" onclick="loginFunction()"><span>Login</span></button>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+			</div>
 
 
 			<div align="center" id="login" style="display: none">
 				<div class="popup">
-					<h2>Welcome Guest!</h2>
 					<br/>
-					<p>Please enter your login and password here</p>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<h2 id="login_title">Welcome Guest!</h2>
+					<br/>
+					<br/>
+					<p class="login_font">Please enter your user name and password here</p>
 					<div>
-						<label>Login </label>
+						<label class="login_font">User-Name </label>
 						<input type="text" id="username_login" value="" />
 					</div>
 					<br/>
 					<div>
-						<label>Password</label>
+						<label class="login_font">Password</label>
 						<input type="password" id="password_login" value="" />
 					</div>
 					<br/>
 					<button onclick="login()" >Sign up </button>
-					<a class="close" href="#close"></a>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
 					<br/>
 					<br/>
 					<br/>
@@ -110,13 +127,12 @@
 			</div>
 
 
-				<div align="center" id="register" style="display: none">
-				<div class="popup">
+			<div align="center" id="register" style="display: none">
+
+				<form action="" name="registration" id="registerForm">
 					<h2>Register</h2>
-					<br/>
 					<p>Please enter your details here</p>
 					<br/>
-					<form action="" name="registration">
 					<div>
 						<label for="username_register">Login (Username)</label>
 						<input type="text" id="username_register" name="username_register1" value="" />
@@ -142,73 +158,87 @@
 						<input type="date" id="birthdayDate_register" name="birthdayDate_register1" value="" />
 					</div>
 					<br/>
+					<br/>
 					<button id="registerButton" type="submit" value="validate">Sign up </button>
 					<br/>
 					<br/>
 					<br/>
-					</form>
-				</div>
+				</form>
 			</div>
 
 				<!-- The Modal -->
-				<div id="myModal" class="modal">
+			<div id="myModal" class="modal">
 
-					<!-- Modal content -->
-					<div class="modal-content">
-						<span class="close1">&times;</span>
-						<p class="aboutParagraph">created by: Iris Dreizenshtok & Chen Avraham</p>
-						<p class="aboutParagraph">this work is part of second assignment in Web Development Enviroment course. As part of building thos website we used Validate Plugin of JQuery. In Addition, we used a design template. </p>
-						<p class="aboutParagraph">the difficulties in this assignment were to understand how the plugin works and how to match it to our use</p>
-
-					</div>
+				<!-- Modal content -->
+				<div class="modal-content">
+					<span class="close1">&times;</span>
+					<p class="aboutParagraph">created by: Iris Dreizenshtok & Chen Avraham</p>
+					<p class="aboutParagraph">this work is part of second assignment in Web Development Enviroment course. As part of building thos website we used Validate Plugin of JQuery. In Addition, we used a design template. </p>
+					<p class="aboutParagraph">the difficulties in this assignment were to understand how the plugin works and how to match it to our use</p>
 
 				</div>
 
-				<div id="setting" style="display: none">
-					<label for="upTarget">please enter a key of your up move:</label>
-					<input id="upTarget" type="text">
+			</div>
+
+			<div id="setting" style="display: none">
+				<form action="" name="settingsForm" id="settingsForm">
+					<label  for="upTarget">please enter a key of your up move:</label>
+					<input id="upTarget" name="upTarget1" type="text">
 					<br>
 					<br>
 					<label for="downTarget">please enter a key of your down move:</label>
-					<input id="downTarget" type="text">
+					<input id="downTarget" name="downTarget1" type="text">
 					<br>
 					<br>
 					<label for="leftTarget">please enter a key of your left move:</label>
-					<input id="leftTarget" type="text">
+					<input id="leftTarget" name="leftTarget1" type="text">
 					<br>
 					<br>
 					<label for="rightTarget">please enter a key of your right move:</label>
-					<input id="rightTarget" type="text">
+					<input id="rightTarget" name="rightTarget1" type="text">
 					<br>
 					<br>
 					<label for="numOfBalls">please enter number of balls:</label>
-					<input id="numOfBalls" type="text">
+					<input id="numOfBalls" name="numOfBalls1" type="text">
+					<br>
+					<br>
+					<label for="firstColor">please enter color of first ball(5 points):</label>
+					<input id="firstColor" name="firstColor1" type="color">
+					<br>
+					<br>
+					<label for="secondColor">please enter color of second ball(15 points):</label>
+					<input id="secondColor" name="secondColor1" type="color">
+					<br>
+					<br>
+					<label for="thirdColor">please enter color of third ball(25 points):</label>
+					<input id="thirdColor" name="thirdColor1" type="color">
 					<br>
 					<br>
 					<label for="gameTime">please enter game time:</label>
-					<input id="gameTime" type="text">
+					<input id="gameTime" name="gameTime1" type="text">
 					<br>
 					<br>
 					<label for="numOfMonsters">please enter number of monsters:</label>
-					<input id="numOfMonsters" type="text">
+					<input id="numOfMonsters" name="numOfMonsters1" type="text">
 					<br>
 					<br>
-					<button>update</button>        <button>random values</button>
+					<button class="myButton" onclick="updateFunction()">update</button>        <button class="myButton" onclick="enterRandomValues()">random values</button>
 					<br>
 					<br>
-				</div>
 
-
+				</form>
 			</div>
-		</div> <!-- end of content -->
 
-	</div>	<!-- end of main -->
+
+
+		</div> <!-- end of content -->
+	</div><!-- end of main -->
 
 	<div id="tooplate_footer">
 
 		this website was made as part of Assignment2 in Web Development Enviroment course.
 		<br/>
-		For more information contact as: irisdrei7@gmail.com
+		For more information contact us: irisdrei7@gmail.com
 		<br/>
 		<a href="#">PackWomen</a>
 
@@ -216,28 +246,131 @@
 
 </div><!-- end of wrapper -->
 
+
 <script>
-	let upKey=38;
-	let downKey=40;
-	let leftKey=37;
-	let rightKey=39;
+	let upKey;
+	let downKey;
+	let leftKey;
+	let rightKey;
+	let numberOfBalls;
+	let firstColor="#ff0000";//red as default
+	let secondColor="#008000";//green as default
+	let thirdColor="#0000ff";//blue as default
+	let gameTime;
+	let numberOfMonsters;
 	$("#upTarget").keydown(function (event) {
-		upKey=event.keyCode;
-		alert("the key you chose:"+event.key)
+		if(event!=null){
+			if(event.key!=="Backspace"){
+					upKey=event.keyCode;
+					alert("the key you chose:"+event.key)
+			}
+			else{
+				alert("you are not allowed to choose Backspace");
+			}
+		}
 	})
 	$("#downTarget").keydown(function (event) {
-		downKey=event.keyCode;
-		alert("the key you chose:"+event.key)
+		if(event!=null){
+			if(event.key!=="Backspace"){
+				downKey=event.keyCode;
+				alert("the key you chose:"+event.key)
+			}
+			else{
+				alert("you are not allowed to choose Backspace");
+			}
+		}
 	})
 	$("#leftTarget").keydown(function (event) {
-		downKey=event.keyCode;
-		alert("the key you chose:"+event.key)
+		if(event!=null){
+			if(event.key!=="Backspace"){
+				leftKey=event.keyCode;
+				alert("the key you chose:"+event.key)
+			}
+			else{
+				alert("you are not allowed to choose Backspace");
+			}
+		}
 	})
 	$("#rightTarget").keydown(function (event) {
-		downKey=event.keyCode;
-		alert("the key you chose:"+event.key)
+		if(event!=null){
+			if(event.key!=="Backspace"){
+				rightKey=event.keyCode;
+				alert("the key you chose:"+event.key)
+			}
+			else{
+				alert("you are not allowed to choose Backspace");
+			}
+		}
 	})
 
+	function enterRandomValues(){
+		upKey=38;
+		document.getElementById("upTarget").value="ArrowUp";
+		downKey=40;
+		document.getElementById("downTarget").value="ArrowDown";
+		leftKey=37;
+		document.getElementById("leftTarget").value="ArrowLeft";
+		rightKey=39;
+		document.getElementById("rightTarget").value="ArrowRight";
+		numberOfBalls=Math.floor((Math.random()*(90-50)+50));
+		document.getElementById("numOfBalls").value=numberOfBalls;
+		firstColor=getRandomColor();
+		document.getElementById("firstColor").value=firstColor;
+		secondColor=getRandomColor();
+		document.getElementById("secondColor").value=secondColor;
+		thirdColor=getRandomColor();
+		document.getElementById("thirdColor").value=thirdColor;
+		gameTime=Math.floor(Math.random()*(10000000-60)+60);
+		document.getElementById("gameTime").value=gameTime;
+		numberOfMonsters=Math.floor(Math.random()*(4-1)+1);
+		document.getElementById("numOfMonsters").value=numberOfMonsters;
+	}
+	function getRandomColor() {
+		var letters = '0123456789ABCDEF';
+		var color = '#';
+		for (var i = 0; 6 > i; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	}
+
+	function updateFunction(){
+		if(upKey==null || downKey==null || leftKey==null || rightKey==null){
+			alert("you need to define all move keys")
+		}
+		else if(upKey==downKey || upKey==leftKey || upKey==rightKey || downKey==leftKey ||downKey==rightKey || leftKey==rightKey){
+			alert(upKey)
+			alert(downKey)
+			alert(leftKey)
+			alert(rightKey)
+			alert("you can't choose the same key for 2 different actions")
+		}
+		else if(upKey==null){
+			alert("you didn't choose your up key")
+		}
+		else if(downKey==null){
+			alert("you didn't choose your down key")
+		}
+		else if(leftKey==null){
+			alert("you didn't choose your left key")
+		}
+		else if(rightKey==null){
+			alert("you didn't choose your right key")
+		}
+		else if(document.getElementById("firstColor").value==document.getElementById("secondColor").value || document.getElementById("firstColor").value==document.getElementById("thirdColor").value ||document.getElementById("secondColor").value==document.getElementById("thirdColor").value){
+			alert("you can't choose the same color for 2 balls")
+		}
+		else{
+			numberOfBalls=document.getElementById("numOfBalls").value;
+			firstColor=document.getElementById("firstColor").value;
+			secondColor=document.getElementById("secondColor").value;
+			thirdColor=document.getElementById("thirdColor").value;
+			gameTime=document.getElementById("gameTime").value;
+			numberOfMonsters=document.getElementById("numOfMonsters").value;
+			alert("updated!")
+		}
+
+	}
 	let modal = document.getElementById("myModal");
 
 	let btn = document.getElementById("about");
@@ -317,6 +450,69 @@
 				store();
 			}
 		});
+
+	$("form[name='settingsForm']").validate({
+		// Specify validation rules
+		rules: {
+			// The key name on the left side is the name attribute
+			// of an input field. Validation rules are defined
+			// on the right side
+			upTarget1: {
+				//required: true,
+			},
+			downTarget1: {
+			//	required: true,
+			},
+			leftTarget1:{
+			//	required: true,
+
+			},
+			rightTarget1: {
+				//required: true,
+			},
+			numOfBalls1:{
+				required: true,
+				min: 50,
+				max: 90
+			},
+			gameTime1:{
+				required: true,
+				min: 60
+			},
+			numOfMonsters1:{
+				required:true,
+				min: 1,
+				max: 4
+			}
+		},
+		// Specify validation error messages
+		messages: {
+			upTarget1: "Please enter your up move",
+			downTarget1: "Please enter your down move",
+			leftTarget1: "Please enter your left move",
+			rightTarget1: "Please enter your right move",
+			numOfBalls1: {
+				required: "Please enter number of balls",
+				min: "minimum balls allowed is 50",
+				max:"maximum balls allowed is 90"
+			},
+			gameTime1:{
+				required: "Please enter game time",
+				min: "minimum time required is 60 seconds"
+			},
+			numOfMonsters1:{
+				required: "please enter number of monsters",
+				min: "minimum number of monsters required is 1",
+				max: "maximum number of monsters required is 4"
+			},
+
+		},
+		// Make sure the form is submitted to the destination defined
+		// in the "action" attribute of the form when valid
+		submitHandler: function() {
+			//updateFunction();
+		}
+	});
 
 		// $("#registerButton").on('click', function () {
 		// 	let regex='/\d/';
@@ -462,13 +658,54 @@
 	
 	function settingClick() {
 		var welcomeDiv = document.getElementById('welcome');
-		if (welcomeDiv.style.display === 'none') {
-			welcomeDiv.style.display = 'block';
-		} else {
+		var registerDiv = document.getElementById('register');
+		var loginDiv = document.getElementById('login');
+		if (welcomeDiv.style.display !== 'none') {
 			welcomeDiv.style.display = 'none';
-			var y = document.getElementById('setting');
-			y.style.display='block'
 		}
+		if(registerDiv.style.display !== 'none') {
+			registerDiv.style.display = 'none';
+		}
+		if(loginDiv.style.display !== 'none') {
+			loginDiv.style.display = 'none';
+		}
+		var y = document.getElementById('setting');
+		y.style.display='block'
+	}
+
+	function loginClick() {
+		var welcomeDiv = document.getElementById('welcome')
+		var registerDiv = document.getElementById('register');
+		var settingDiv = document.getElementById('setting');
+		if (welcomeDiv.style.display !== 'none') {
+			welcomeDiv.style.display = 'none';
+		}
+		if(registerDiv.style.display !== 'none') {
+			registerDiv.style.display = 'none';
+		}
+		if(settingDiv.style.display !== 'none') {
+			settingDiv.style.display = 'none';
+		}
+		var y = document.getElementById('login');
+		y.style.display='block'
+
+	}
+
+	function registerClick() {
+		var welcomeDiv = document.getElementById('welcome')
+		var loginDiv = document.getElementById('login');
+		var settingDiv = document.getElementById('setting');
+		if (welcomeDiv.style.display !== 'none') {
+			welcomeDiv.style.display = 'none';
+		}
+		if(loginDiv.style.display !== 'none') {
+			loginDiv.style.display = 'none';
+		}
+		if(settingDiv.style.display !== 'none') {
+			settingDiv.style.display = 'none';
+		}
+		var y = document.getElementById('register');
+		y.style.display='block'
 	}
 
 </script>
