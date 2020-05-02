@@ -68,6 +68,14 @@
 					</div>
 					<br>
 				<canvas id="canvas" style="text-align: center" height="450" width="450"></canvas>
+				<br/>
+				<br/>
+				<button onclick="startGame()">new game</button>
+				<br/>
+				<br/>
+				<div id="settingDetailsInGame">
+
+				</div>
 
 				<img id="ghost" src="images/monster2.png" alt="" style="display: none"/>
 			</div>
@@ -270,6 +278,7 @@
 			 return upKey;
 		 }
 		 else{
+		 	upKey=38;
 		 	return 38;
 		 }
 
@@ -279,6 +288,7 @@
 			return downKey;
 		}
 		else{
+			downKey=40;
 			return 40;
 		}
 	}
@@ -287,6 +297,7 @@
 			return leftKey;
 		}
 		else{
+			leftKey=37;
 			return 37;
 		}
 	}
@@ -295,6 +306,7 @@
 			return rightKey;
 		}
 		else{
+			rightKey=39;
 			return 39;
 		}
 	}
@@ -303,7 +315,8 @@
 			return numberOfBalls;
 		}
 		else{
-			return Math.floor((Math.random()*(90-50)+50));
+			numberOfBalls=Math.floor((Math.random()*(90-50)+50));
+			return numberOfBalls;
 		}
 	}
 	function getFirstColor(){
@@ -311,7 +324,8 @@
 			return firstColor;
 		}
 		else{
-			return "#ff0000";
+			firstColor="#ff0000"
+			return firstColor;
 		}
 	}
 	function getSecondColor(){
@@ -319,7 +333,8 @@
 			return secondColor;
 		}
 		else{
-			return "#008000";
+			secondColor="#008000";
+			return secondColor;
 		}
 
 	}
@@ -328,7 +343,8 @@
 			return thirdColor;
 		}
 	else{
-		return "#0000ff";
+		thirdColor="#0000ff";
+		return thirdColor;
 		}
 	}
 	function getGameTime(){
@@ -336,7 +352,8 @@
 			return gameTime;
 		}
 		else{
-			return Math.floor(Math.random()*(10000000-60)+60);
+			gameTime=Math.floor(Math.random()*(10000000-60)+60);
+			return gameTime;
 		}
 	}
 	function getNumberOfMonsters(){
@@ -344,7 +361,8 @@
 			return numberOfMonsters;
 		}
 		else{
-			return Math.floor(Math.random()*(4-1)+1);
+			numberOfMonsters=Math.floor(Math.random()*(4-1)+1);
+			return numberOfMonsters;
 		}
 	}
 
@@ -435,10 +453,6 @@
 			alert("you need to define all move keys")
 		}
 		else if(upKey==downKey || upKey==leftKey || upKey==rightKey || downKey==leftKey ||downKey==rightKey || leftKey==rightKey){
-			alert(upKey)
-			alert(downKey)
-			alert(leftKey)
-			alert(rightKey)
 			alert("you can't choose the same key for 2 different actions")
 		}
 		else if(upKey==null){
@@ -678,6 +692,49 @@
 							x.style.display = 'none';
 							var y = document.getElementById('game');
 							y.style.display='block'
+							var settingsDitails=document.getElementById("settingDetailsInGame");
+							var p1 = document.createElement("p");
+							var node1 = document.createTextNode("your number of balls is:"+getNumberOfBalls());
+							var node2 = document.createTextNode("your first color is(5 points):"+getFirstColor());
+							var node3 = document.createTextNode("your second color is(15 points)::"+getSecondColor());
+							var node4 = document.createTextNode("your third color is(25 points):"+getThirdColor());
+							var node5 = document.createTextNode(("your game time is:"+getGameTime()));
+							var node6 = document.createTextNode("your number of monsters is:"+getNumberOfMonsters());
+							var node7 = document.createTextNode("your up key is:"+getUpKey());
+							var node8 = document.createTextNode("your down key is:"+getDownKey());
+							var node9 = document.createTextNode("your left key is:"+getLeftKey());
+							var node10= document.createTextNode("your right key is:"+getRightKey());
+							var nodeBr1 = document.createElement("br");
+							var nodeBr2 = document.createElement("br");
+							var nodeBr3 = document.createElement("br");
+							var nodeBr4 = document.createElement("br");
+							var nodeBr5 = document.createElement("br");
+							var nodeBr6 = document.createElement("br");
+							var nodeBr7 = document.createElement("br");
+							var nodeBr8 = document.createElement("br");
+							var nodeBr9 = document.createElement("br");
+							var nodeBr10 = document.createElement("br");
+							p1.appendChild(node1);
+							p1.appendChild(nodeBr1);
+							p1.appendChild(node2);
+							p1.appendChild(nodeBr2);
+							p1.appendChild(node3);
+							p1.appendChild(nodeBr3);
+							p1.appendChild(node4);
+							p1.appendChild(nodeBr4);
+							p1.appendChild(node5);
+							p1.appendChild(nodeBr5);
+							p1.appendChild(node6);
+							p1.appendChild(nodeBr6);
+							p1.appendChild(node7);
+							p1.appendChild(nodeBr7);
+							p1.appendChild(node8);
+							p1.appendChild(nodeBr8);
+							p1.appendChild(node9);
+							p1.appendChild(nodeBr9);
+							p1.appendChild(node10);
+							p1.appendChild(nodeBr10);
+							settingsDitails.appendChild(p1);
 							initialize(getUpKey(),getDownKey(),getLeftKey(),getRightKey(),getNumberOfBalls(),getFirstColor(),getSecondColor(),getThirdColor(),getGameTime(),getNumberOfMonsters());
 							playMusic();
 							startGame();
