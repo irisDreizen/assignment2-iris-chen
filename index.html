@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Blue Wave Template</title>
 	<meta name="keywords" content="" />
-	<meta name="description" content="" />
+	<meta name="description" content="width=device-width, initial-scale=1.0" />
 	<link href="tooplate_style.css" rel="stylesheet" type="text/css" />
 	<!--   Free Website Template by t o o p l a t e . c o m   -->
 	<script language="javascript" type="text/javascript">
@@ -63,7 +63,7 @@
 						<input id="lblTime" type="text" />
 					</div>
 					<br>
-				<canvas id="canvas" height="950" width="1000"></canvas>
+				<canvas id="canvas" style="text-align: center;" height="600" width="600"></canvas>
 			</div>
 
 
@@ -514,49 +514,6 @@
 		}
 	});
 
-		// $("#registerButton").on('click', function () {
-		// 	let regex='/\d/';
-		// 	let username = document.getElementById('username_register');
-		// 	let password = document.getElementById('password_register');
-		// 	let fullName=document.getElementById('fullName_register');
-		// 	let email=document.getElementById('email_register');
-		// 	let birthdayDate=document.getElementById('birthdayDate_register');
-		// 	console.log("1")
-		// 	if(!username.value){
-		// 		alert("you didn't fill user name");
-		// 		console.log("2")
-		// 	}
-		// 	else if(!password.value){
-		// 		alert("you didn't fill password");
-		// 	}
-		// 	else if(!fullName.value){
-		// 		alert("you didn't fill full name");
-		// 	}
-		// 	else if(!email.value){
-		// 		alert("you didn't fill email");
-		// 	}
-		// 	else if(!birthdayDate.value){
-		// 		alert("you didn't fill birthday date");
-		// 	}
-		// 	else{
-		// 		if(!password.value.match(/(?=.*\d)(?=.*[A-Za-z]).{6,}/)){
-		// 			alert("your password is not valid. it must have at least 6 characters, one letter and one digit")
-		// 		}
-		// 		else if(!isNaN(fullName.value)){
-		// 			console.log(fullName.value)
-		// 			alert("you full name can't include digits")
-		// 		}
-		// 		else if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))){
-		// 			alert("your email is not valid");
-		// 		}
-		// 		else{
-		// 			console.log("3")
-		// 			store();
-		// 		}
-		// 	}
-		// });
-
-
 	function loginFunction() {
 		var x = document.getElementById('welcome');
 		if (x.style.display === 'none') {
@@ -660,6 +617,10 @@
 		var welcomeDiv = document.getElementById('welcome');
 		var registerDiv = document.getElementById('register');
 		var loginDiv = document.getElementById('login');
+		var gameDiv=document.getElementById('game');
+		if(gameDiv.style.display!=='none'){
+			gameDiv.style.display='none';
+		}
 		if (welcomeDiv.style.display !== 'none') {
 			welcomeDiv.style.display = 'none';
 		}
@@ -677,6 +638,10 @@
 		var welcomeDiv = document.getElementById('welcome')
 		var registerDiv = document.getElementById('register');
 		var settingDiv = document.getElementById('setting');
+		var gameDiv=document.getElementById('game');
+		if(gameDiv.style.display!=='none'){
+			gameDiv.style.display='none';
+		}
 		if (welcomeDiv.style.display !== 'none') {
 			welcomeDiv.style.display = 'none';
 		}
@@ -695,6 +660,10 @@
 		var welcomeDiv = document.getElementById('welcome')
 		var loginDiv = document.getElementById('login');
 		var settingDiv = document.getElementById('setting');
+		var gameDiv=document.getElementById('game');
+		if(gameDiv.style.display!=='none'){
+			gameDiv.style.display='none';
+		}
 		if (welcomeDiv.style.display !== 'none') {
 			welcomeDiv.style.display = 'none';
 		}
