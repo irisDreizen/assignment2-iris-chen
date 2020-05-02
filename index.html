@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Blue Wave Template</title>
-	<meta name="keywords" content="" />
+<!--	<meta name="keywords" content="" />-->
 	<meta name="description" content="width=device-width, initial-scale=1.0" />
 	<link href="tooplate_style.css" rel="stylesheet" type="text/css" />
 	<!--   Free Website Template by t o o p l a t e . c o m   -->
@@ -51,25 +51,24 @@
 	<div id="tooplate_main">
 
 		<div id="tooplate_content">
-				 
-				<div align="center" id="game" style="display: none">
-					<div align="center" class="card">
-						<div id="score">
-							<label for="lblScore">SCORE:</label>
-							<input id="lblScore" type="text" />
-						</div>
-						<br>
-						<div id="time" class="time">
-							<label for="lblTime">TIME:</label>
-							<input id="lblTime" type="text" />
-						</div>
-						<br>
+
+			<div align="center" id="game" style="display: none">
+				<audio hidden id="myAudio">
+					<source src="audio/packmanSong.mp3" type="audio/mpeg">
+					If you're reading this, audio isn't supported.
+				</audio>
+					<div id="score">
+						<label for="lblScore">SCORE:</label>
+						<input id="lblScore" type="text" />
 					</div>
-					<canvas id="canvas" style="text-align: center;"  height="400" width="400"></canvas>
-					<img id="ghost" src="images/monster2.png" alt="" style="display: none"/>
-					<audio id="myAudio" >
-					<source src="C:\Users\Chen\Desktop\SIMESTER_H\simester b\svivot pituah\sound.mp3"  type="audio/mp3">
-					</audio>
+					<br>
+					<div id="time" class="time">
+						<label for="lblTime">TIME:</label>
+						<input id="lblTime" type="text" />
+					</div>
+					<br>
+				<canvas id="canvas" style="text-align: center;" height="400" width="400"></canvas>
+				<img id="ghost" src="images/monster2.png" alt="" style="display: none"/>
 			</div>
 
 
@@ -264,6 +263,38 @@
 	let thirdColor="#0000ff";//blue as default
 	let gameTime;
 	let numberOfMonsters;
+
+	function getUpKey(){
+		return upKey;
+	}
+	function getDownKey(){
+		return downKey;
+	}
+	function getLeftKey(){
+		return leftKey;
+	}
+	function getRightKey(){
+		return rightKey;
+	}
+	function getNumberOfBalls(){
+		return numberOfBalls;
+	}
+	function getFirstColor(){
+		return firstColor;
+	}
+	function getSecondColor(){
+		return secondColor;
+	}
+	function getThirdColor(){
+		return thirdColor;
+	}
+	function getGameTime(){
+		return gameTime;
+	}
+	function getNumberOfMonsters(){
+		return numberOfMonsters;
+	}
+
 	$("#upTarget").keydown(function (event) {
 		if(event!=null){
 			if(event.key!=="Backspace"){
@@ -588,6 +619,7 @@
 							x.style.display = 'none';
 							var y = document.getElementById('game');
 							y.style.display='block'
+							playMusic();
 							startGame();
 						}
 					}
@@ -621,6 +653,7 @@
 	}
 
 	function settingClick() {
+		stopMusic();
 		var welcomeDiv = document.getElementById('welcome');
 		var registerDiv = document.getElementById('register');
 		var loginDiv = document.getElementById('login');
@@ -642,6 +675,7 @@
 	}
 
 	function loginClick() {
+		stopMusic();
 		var welcomeDiv = document.getElementById('welcome')
 		var registerDiv = document.getElementById('register');
 		var settingDiv = document.getElementById('setting');
@@ -664,6 +698,7 @@
 	}
 
 	function registerClick() {
+		stopMusic();
 		var welcomeDiv = document.getElementById('welcome')
 		var loginDiv = document.getElementById('login');
 		var settingDiv = document.getElementById('setting');
@@ -682,6 +717,14 @@
 		}
 		var y = document.getElementById('register');
 		y.style.display='block'
+	}
+	function stopMusic() {
+		var song = document.getElementById("myAudio");
+		song.pause();
+	}
+	function playMusic() {
+		var song = document.getElementById("myAudio");
+		song.play();
 	}
 
 </script>
