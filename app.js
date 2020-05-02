@@ -336,7 +336,7 @@ function Draw() {
 			} else if (board[i][j] == 4) {
 				context.beginPath();
 				context.rect(center.x - 10, center.y - 10, 30, 30);
-				context.fillStyle = "grey"; //color
+				context.fillStyle = "blue"; //color
 				context.fill();
 			}
 			else if (board[i][j] == 9) {
@@ -659,6 +659,38 @@ candy4.num=0;
 candys=[candy1,candy2,candy3,candy4];
 
 
+function shapeDie() {
+	score=score-10;
+	pacman_remain--;
+	var newShape=findRandomEmptyCell(board);
+	board[newShape[0]][newShape[1]]=2;
+	board[shape.i][shape.j]=0;
+	shape.i=newShape[0];
+	shape.j=newShape[1];
+	for(var m=0; m<numOfMonster2; m++){
+		if(m==0){
+			monsters[m].x1=12;
+			monsters[m].y1=12;
+		}
+		if(m==1){
+			monsters[m].x1=1;
+			monsters[m].y1=1;
+		}
+		if(m==2){
+			monsters[m].x1=12;
+			monsters[m].y1=1;
+		}
+		if (m==3){
+			monsters[m].x1=1;
+			monsters[m].y1=12;
+		}
+
+	}
+
+
+}
+
+
 
 
 var directions=new Array();
@@ -719,6 +751,12 @@ function UpdatePositionMonster() {
 				candys[c].bool=false;
 			}
 		}
+
+		if(monsters[c].x1==shape.i && monsters[c].y1==shape.j){
+			shapeDie();
+		}
+
+
 	}
 
 	for(var m=0; m<numOfMonster2; m++){
@@ -771,43 +809,42 @@ function UpdatePositionMonster() {
 				angle.y = 1.85;
 			}
 		}
+		for(var m=0; m<numOfMonster2; m++) {
+			if (monsters[m].x1 == shape.i && monsters[m].y1 == shape.j) {
+				shapeDie();
+			}
+		}
 		if (board[shape.i][shape.j] == 1) {
 			score=score+5;
+			food_remain--;
 		}
 		else if(board[shape.i][shape.j] == 7){
 			score=score+15;
+			food_remain--;
+
 
 		}
 		else if(board[shape.i][shape.j] == 8){
 			score=score+25;
+			food_remain--;
+
 
 		}
 		board[shape.i][shape.j] = 2;
 		var currentTime = new Date();
-		time_elapsed = (currentTime - start_time) / 1000;
+		time_elapsed = (timeLeft-(currentTime - start_time)) / 100000;
 		if(pacman_remain==0){
 			window.alert("Loser!");
 		}
-
-			for(var m=0; m<numOfMonster2; m++){
-				if(monsters[m].x1==shape.i && monsters[m].y1==shape.j){
-					score=score-10;
-
-					//audio failed
-					//startGame();
-				}
-			}
-
-		 if (score >= 20 && time_elapsed <= 10) {
-			pac_color = "green";
-		}
-		if (score == 1000) {
+		if(time_elapsed<=0 && score<100){
 			window.clearInterval(interval);
-			window.alert("Game completed");
+			window.alert("You are better than"+""+score+" points!");
+		}
+
+		if (food_remain == 0) {
+			window.clearInterval(interval);
+			window.alert("Winner");
 		} else {
-
-
-			//UpdatePositionMonster();
 
 			Draw();
 		}
