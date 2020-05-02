@@ -53,6 +53,10 @@
 		<div id="tooplate_content">
 
 			<div align="center" id="game" style="display: none">
+				<audio hidden id="myAudio">
+					<source src="audio/packmanSong.mp3" type="audio/mpeg">
+					If you're reading this, audio isn't supported.
+				</audio>
 					<div id="score">
 						<label for="lblScore">SCORE:</label>
 						<input id="lblScore" type="text" />
@@ -582,6 +586,7 @@
 							x.style.display = 'none';
 							var y = document.getElementById('game');
 							y.style.display='block'
+							playMusic();
 						}
 					}
 					else{
@@ -614,6 +619,7 @@
 	}
 	
 	function settingClick() {
+		stopMusic();
 		var welcomeDiv = document.getElementById('welcome');
 		var registerDiv = document.getElementById('register');
 		var loginDiv = document.getElementById('login');
@@ -635,6 +641,7 @@
 	}
 
 	function loginClick() {
+		stopMusic();
 		var welcomeDiv = document.getElementById('welcome')
 		var registerDiv = document.getElementById('register');
 		var settingDiv = document.getElementById('setting');
@@ -657,6 +664,7 @@
 	}
 
 	function registerClick() {
+		stopMusic();
 		var welcomeDiv = document.getElementById('welcome')
 		var loginDiv = document.getElementById('login');
 		var settingDiv = document.getElementById('setting');
@@ -675,6 +683,14 @@
 		}
 		var y = document.getElementById('register');
 		y.style.display='block'
+	}
+	function stopMusic() {
+		var song = document.getElementById("myAudio");
+		song.pause();
+	}
+	function playMusic() {
+		var song = document.getElementById("myAudio");
+		song.play();
 	}
 
 </script>
