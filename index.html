@@ -265,35 +265,92 @@
 	let numberOfMonsters;
 
 	function getUpKey(){
-		return upKey;
+		 if(upKey!==null){
+			 return upKey;
+		 }
+		 else{
+		 	return 38;
+		 }
+
 	}
 	function getDownKey(){
-		return downKey;
+		if(downKey!==null){
+			return downKey;
+		}
+		else{
+			return 40;
+		}
 	}
 	function getLeftKey(){
-		return leftKey;
+		if(leftKey!=null){
+			return leftKey;
+		}
+		else{
+			return 37;
+		}
 	}
 	function getRightKey(){
-		return rightKey;
+		if(rightKey!==null){
+			return rightKey;
+		}
+		else{
+			return 39;
+		}
 	}
 	function getNumberOfBalls(){
-		return numberOfBalls;
+		if(numberOfBalls!==null){
+			return numberOfBalls;
+		}
+		else{
+			return Math.floor((Math.random()*(90-50)+50));
+		}
 	}
 	function getFirstColor(){
-		return firstColor;
+		if(firstColor!==null){
+			return firstColor;
+		}
+		else{
+			return "#ff0000";
+		}
 	}
 	function getSecondColor(){
-		return secondColor;
+		if(secondColor!==null){
+			return secondColor;
+		}
+		else{
+			return "#008000";
+		}
+
 	}
 	function getThirdColor(){
-		return thirdColor;
+		if(thirdColor!==null){
+			return thirdColor;
+		}
+	else{
+		return "#0000ff";
+		}
 	}
 	function getGameTime(){
-		return gameTime;
+		if(gameTime!==null){
+			return gameTime;
+		}
+		else{
+			return Math.floor(Math.random()*(10000000-60)+60);
+		}
 	}
 	function getNumberOfMonsters(){
-		return numberOfMonsters;
+		if(numberOfMonsters!==null){
+			return numberOfMonsters;
+		}
+		else{
+			return Math.floor(Math.random()*(4-1)+1);
+		}
 	}
+	
+	function $(){
+		return document.querySelector.apply(document,arguments);
+	}
+	
 
 	$("#upTarget").keydown(function (event) {
 		if(event!=null){
