@@ -41,14 +41,14 @@ function startGame(){
 }
 
 var x=document.getElementById("myAudio");
-
-function playAudio() {
-	x.play();
-
-}
+//
+// function playAudio() {
+// 	x.play();
+//
+// }
 
 function Start() {
-	playAudio();
+	//playAudio();
 
 	board = new Array();
 	score = 0;
