@@ -50,12 +50,29 @@ var x=document.getElementById("myAudio");
 function Start() {
 	//playAudio();
 
-	board = new Array();
-	score = 0;
+	//board = new Array();
+	board=[
+		[4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+		[4,4,4,4,4,4,4,4,4,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,4,4,4,4,4,4,4,4,4,4,4,4,4]];
+
+
+		score = 0;
 	//test
 	pac_color = "yellow";
 	var cnt = 100;
-	var food_remain = 80;
+	var food_remain = 15;
 	var pacman_remain = 1;
 	start_time = new Date();
 
@@ -69,77 +86,87 @@ function Start() {
 		monsters=[monster1,monster2,monster3];
 	}
 
+	var cellPac=findRandomEmptyCell(board);
+	shape.i = cellPac[0];
+	shape.j = cellPac[1];
+	board[shape.i,shape.j]=2;
 
-	for(var b=0; b<10; b++){
-		board[b] = new Array();
-		for(var v=0; v<10; v++){
-			board[b][v]=0;
-		}
+	// 				shape.j = j;
+	// 				pacman_remain--;
+	// 				board[i][j] = 2;
 
-	}
-
-
-	for (var i = 0; i < 10; i++) {
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < 10; j++) {
-
-
-			if (i == 8 && j == 8) {//monster 1
-				if (numOfMonster > 0) {
-					board[i][j] = 9;
-					numOfMonster--;
-				}
-			} else if (i == 1 && j == 1) {//monster 2
-				if (numOfMonster > 0) {
-					board[i][j] = 9;
-					numOfMonster--;
-				}
-
-			} else if (i == 8 && j == 1) {
-				if (numOfMonster > 0) {
-					board[i][j] = 9;
-					numOfMonster--;
-				}//monster 3
-			// } else if (i == 1 && j == 8) {
-			// 	if (numOfMonster > 0) {
-			// 		board[i][j] = 9;
-			// 		numOfMonster--;
-			// 	}
+	// for(var b=0; b<14; b++){
+	// 	board[b] = new Array();
+	// 	for(var v=0; v<14; v++){
+	// 		board[b][v]=0;
+	// 	}
+	//
+	// }
 
 
+	// for (var i = 0; i < 14; i++) {
+	// 	//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
+	// 	for (var j = 0; j < 14; j++) {
+	//
+	//
+	// 		if (i == 8 && j == 8) {//monster 1
+	// 			if (numOfMonster > 0) {
+	// 				board[i][j] = 9;
+	// 				numOfMonster--;
+	// 			}
+	// 		} else if (i == 1 && j == 1) {//monster 2
+	// 			if (numOfMonster > 0) {
+	// 				board[i][j] = 9;
+	// 				numOfMonster--;
+	// 			}
+	//
+	// 		} else if (i == 8 && j == 1) {
+	// 			if (numOfMonster > 0) {
+	// 				board[i][j] = 9;
+	// 				numOfMonster--;
+	// 			}//monster 3
+	// 		// } else if (i == 1 && j == 8) {
+	// 		// 	if (numOfMonster > 0) {
+	// 		// 		board[i][j] = 9;
+	// 		// 		numOfMonster--;
+	// 		// 	}
+	//
+	//
+	//
+	// 		}else if (
+	// 			 ((i == 3 && j == 3) ||
+	// 			(i == 3 && j == 4) ||
+	// 			   (i == 7 && j == 2) ||(i == 7 && j == 3))
+	// 		) {
+	// 			board[i][j] = 4;
+	// 		} else {
+	// 			var randomNum = Math.random();
+	// 			if (randomNum <= (1.0 * food_remain) / cnt ) {
+	// 				food_remain--;
+	// 				var randomNum2 = Math.random();
+	// 				if (randomNum2 >= 0.9) {
+	// 					board[i][j] = 8;
+	// 				} else if (randomNum2 >= 0.7)
+	// 					board[i][j] = 7;
+	// 				else {
+	// 					board[i][j] = 1;
+	// 				}
+	// 			}
+	// 			else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt  ) {
+	// 				shape.i = i;
+	// 				shape.j = j;
+	// 				pacman_remain--;
+	// 				board[i][j] = 2;
+	// 			}else {
+	// 				board[i][j] = 0;
+	//
+	// 			}
+	// 			cnt--;
+	// 		}
+	// 	}
+	// }
 
-			}else if (
-				 ((i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				   (i == 7 && j == 2) ||(i == 7 && j == 3))
-			) {
-				board[i][j] = 4;
-			} else {
-				var randomNum = Math.random();
-				if (randomNum <= (1.0 * food_remain) / cnt ) {
-					food_remain--;
-					var randomNum2 = Math.random();
-					if (randomNum2 >= 0.9) {
-						board[i][j] = 8;
-					} else if (randomNum2 >= 0.7)
-						board[i][j] = 7;
-					else {
-						board[i][j] = 1;
-					}
-				}
-				else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt  ) {
-					shape.i = i;
-					shape.j = j;
-					pacman_remain--;
-					board[i][j] = 2;
-				}else {
-					board[i][j] = 0;
 
-				}
-				cnt--;
-			}
-		}
-	}
 
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -183,11 +210,13 @@ function Start() {
 
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 9 + 1);
-	var j = Math.floor(Math.random() * 9 + 1);
+
+	var i = Math.floor(Math.random() * 13 + 1);
+	var j = Math.floor(Math.random() * 13 + 1);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 9 + 1);
-		j = Math.floor(Math.random() * 9 + 1);
+		i = Math.floor(Math.random() * 13 + 1);
+		j = Math.floor(Math.random() * 13 + 1);
+		console.log("my i is: " + i+ " and my j is:"+ j);
 	}
 	return [i, j];
 }
@@ -212,8 +241,8 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-	for (var i = 0; i < 10; i++) {
-		for (var j = 0; j < 10; j++) {
+	for (var i = 0; i < 14; i++) {
+		for (var j = 0; j < 14; j++) {
 			var center = new Object();
 
 			center.x = i * 20 + 20;
@@ -270,7 +299,7 @@ var temp3;
 var random4;
 
 function moveRight(monster) {
-	if (monster.x1 + 1 < 10 && board[monster.x1 + 1][monster.y1] != 4)
+	if (monster.x1 + 1 < 14 && board[monster.x1 + 1][monster.y1] != 4)
 		return 4;//right
 	else return 0;
 }
@@ -287,7 +316,7 @@ function moveUp(monster) {
 
 }
 function moveDown(monster) {
-	if (monster.y1 + 1 < 10 && board[monster.x1][monster.y1+1] != 4)
+	if (monster.y1 + 1 < 14 && board[monster.x1][monster.y1+1] != 4)
 		return 2;
 	else return 0;//go down
 
