@@ -88,10 +88,11 @@ h6 { font-size: 14px; margin: 0 0 5px; padding: 0; }
 
 
 #canvas{
-	border: solid 1px blue;
-	width: 100%;
+	/*border: solid;*/
+	/*width: 100%;*/
 	/*display: block;*/
 }
+
 #tooplate_wrapper {
 	width: 960px;
 	padding: 0 9px;

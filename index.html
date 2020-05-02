@@ -67,7 +67,8 @@
 						<input id="lblTime" type="text" />
 					</div>
 					<br>
-				<canvas id="canvas" style="text-align: center;" height="600" width="600"></canvas>
+				<canvas id="canvas" style="text-align: center" height="450" width="450"></canvas>
+
 				<img id="ghost" src="images/monster2.png" alt="" style="display: none"/>
 			</div>
 
@@ -346,11 +347,12 @@
 			return Math.floor(Math.random()*(4-1)+1);
 		}
 	}
-	
-	// function $(){
-	// 	return document.querySelector.apply(document,arguments);
-	// }
-	
+
+	window.addEventListener("keydown",function (e) {
+		if([32,37,38,39,40].indexOf(e.keyCode)>-1){
+			e.preventDefault();
+		}
+	},false);
 
 	$("#upTarget").keydown(function (event) {
 		if(event!=null){

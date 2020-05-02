@@ -299,8 +299,8 @@ function Draw() {
 		for (var j = 0; j < 14; j++) {
 			var center = new Object();
 
-			center.x = i * 20 + 20;
-			center.y = j * 20 + 20;
+			center.x = i * 30 + 20;
+			center.y = j * 30 + 20;
 
 
 			if (board[i][j] == 2) {
@@ -331,7 +331,7 @@ function Draw() {
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
-				context.rect(center.x - 10, center.y - 10, 20, 20);
+				context.rect(center.x - 10, center.y - 10, 30, 30);
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
