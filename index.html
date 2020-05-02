@@ -71,29 +71,29 @@
 			</div>
 
 
-			<div align="center" id="welcome">
-				<div>
+				<div align="center" id="welcome">
+					<div>
+						<br/>
+						<h1 class="welcome_title">welcome to</h1>
+						<br/>
+						<br/>
+						<h1 class="welcome_title"> PackWomen</h1>
+					</div>
 					<br/>
-					<h1 class="welcome_title">welcome to</h1>
+					<img id="welcome_logo" src="images/tooplate_logo.png">
 					<br/>
 					<br/>
-					<h1 class="welcome_title"> PackWomen</h1>
+					<button class="button" onclick="registerFunction()"><span>Register</span></button>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					<button class="button" onclick="loginFunction()"><span>Login</span></button>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
 				</div>
-				<br/>
-				<img id="welcome_logo" src="images/tooplate_logo.png">
-				<br/>
-				<br/>
-				<button class="button" onclick="registerFunction()"><span>Register</span></button>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<button class="button" onclick="loginFunction()"><span>Login</span></button>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-			</div>
 
 
 			<div align="center" id="login" style="display: none">
@@ -587,6 +587,7 @@
 							var y = document.getElementById('game');
 							y.style.display='block'
 							playMusic();
+							startGame();
 						}
 					}
 					else{
@@ -617,7 +618,7 @@
 			y.style.display='block'
 		}
 	}
-	
+
 	function settingClick() {
 		stopMusic();
 		var welcomeDiv = document.getElementById('welcome');
