@@ -55,7 +55,7 @@ function Start() {
 	//test
 	pac_color = "yellow";
 	var cnt = 100;
-	var food_remain = 50;
+	var food_remain = 80;
 	var pacman_remain = 1;
 	start_time = new Date();
 
@@ -111,9 +111,7 @@ function Start() {
 			}else if (
 				 ((i == 3 && j == 3) ||
 				(i == 3 && j == 4) ||
-				 (i == 6 && j == 4) ||
-				(i == 6 && j == 1) || (i == 8 && j == 9) || (i == 2 && j == 9) ||
-				 (i == 6 && j == 8) ||(i == 5 && j == 4) || (i == 7 && j == 2) ||(i == 8 && j == 1))
+				   (i == 7 && j == 2) ||(i == 7 && j == 3))
 			) {
 				board[i][j] = 4;
 			} else {
@@ -218,45 +216,45 @@ function Draw() {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
 
-			center.x = i * 40 + 30;
-			center.y = j * 40 + 30;
+			center.x = i * 20 + 20;
+			center.y = j * 20 + 20;
 
 
 			if (board[i][j] == 2) {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, angle.x * Math.PI, angle.y * Math.PI); // half circle
+				context.arc(center.x, center.y, 10, angle.x * Math.PI, angle.y * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(center.x + 6, center.y - 8, 3, 0, 2 * Math.PI); // circle
+				context.arc(center.x + 3, center.y - 5, 2, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 
 			} else if (board[i][j] == 1) {
 				context.beginPath();
-				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
 				context.fillStyle = "red"; //color
 				context.fill();
 			} else if (board[i][j] == 7) {
 				context.beginPath();
-				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
 				context.fillStyle = "blue"; //color
 				context.fill();
 			} else if (board[i][j] == 8) {
 				context.beginPath();
-				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
 				context.fillStyle = "green"; //color
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
-				context.rect(center.x - 25, center.y - 25, 40, 40);
+				context.rect(center.x - 10, center.y - 10, 20, 20);
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
 			else if (board[i][j] == 9) {
 				var img = document.getElementById("ghost");
-				context.drawImage(img, center.x - 25, center.y - 25, 40, 40);
+				context.drawImage(img, center.x - 10, center.y - 10, 20, 20);
 
 			}
 		}
@@ -650,12 +648,33 @@ function UpdatePositionMonster() {
 			}
 		}
 		if (board[shape.i][shape.j] == 1) {
-			score++;
+			score=score+5;
+		}
+		else if(board[shape.i][shape.j] == 7){
+			score=score+15;
+
+		}
+		else if(board[shape.i][shape.j] == 8){
+			score=score+25;
+
 		}
 		board[shape.i][shape.j] = 2;
 		var currentTime = new Date();
 		time_elapsed = (currentTime - start_time) / 1000;
-		if (score >= 20 && time_elapsed <= 10) {
+		if(lives==0){
+			window.alert("Loser!");
+		}
+
+			for(var m=0; m<numOfMonster2; m++){
+				if(monsters[m].x1==shape.i && monsters[m].y1==shape.j){
+					score=score-10;
+					lives--;
+					//audio failed
+					//startGame();
+				}
+			}
+
+		 if (score >= 20 && time_elapsed <= 10) {
 			pac_color = "green";
 		}
 		if (score == 50) {
