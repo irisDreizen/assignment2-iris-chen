@@ -684,6 +684,9 @@ function UpdatePositionMonster() {
 				candys[c].num=board[monsters[c].x1][monsters[c].y1];
 				candys[c].bool=true;
 			}
+			else {
+				candys[c].bool=false;
+			}
 
 		}
 		else if (directions[c] == 4) {//right
@@ -692,6 +695,9 @@ function UpdatePositionMonster() {
 				candys[c].num=board[monsters[c].x1][monsters[c].y1];
 				candys[c].bool=true;
 			}
+			else {
+				candys[c].bool=false;
+			}
 		}
 		else if (directions[c] == 1) {//up
 			monsters[c].y1--;
@@ -699,12 +705,18 @@ function UpdatePositionMonster() {
 				candys[c].num=board[monsters[c].x1][monsters[c].y1];
 				candys[c].bool=true;
 			}
+			else {
+				candys[c].bool=false;
+			}
 		}
 		else if (directions[c] == 2) {//down
 			monsters[c].y1++;
 			if(board[monsters[c].x1][monsters[c].y1]==1 || board[monsters[c].x1][monsters[c].y1]==7 || board[monsters[c].x1][monsters[c].y1]==8){
 				candys[c].num=board[monsters[c].x1][monsters[c].y1];
 				candys[c].bool=true;
+			}
+			else {
+				candys[c].bool=false;
 			}
 		}
 	}
