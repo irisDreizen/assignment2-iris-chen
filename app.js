@@ -7,33 +7,55 @@ var start_time;
 var time_elapsed;
 var interval;
 var interval2;
-var move;
-var lives=5;
+
+
 
 var monster1=new Object();
-monster1.x1=8;
-monster1.y1=8;
+monster1.x1=13;
+monster1.y1=13;
 
 var monster2=new Object();
 monster2.x1=1;
 monster2.y1=1;
 
 var monster3=new Object();
-monster3.x1=8;
+monster3.x1=13;
 monster3.y1=1;
 
-// var monster4=new Object();
-// monster4.x1=1;
-// monster4.y1=8;
+var monster4=new Object();
+ monster4.x1=1;
+ monster4.y1=13;
 
-// var monsters=[monster1,monster2,monster3,monster4];
-
+ var monsters;
+var pacman_remain = 5;
 
 var randomNum3=Math.random();
 
 var numOfMonster=3;
-var numOfMonster2=3;
+var numOfMonster2;
+var food_remain;
+var color_5_score;
+var color_15_score;
+var color_25_score;
+var up;
+var down;
+var left;
+var right;
+var timeLeft;
 var monsterInterval;
+
+function initialize(upK,downK, leftK, rightK,ballsNum,firstCo,secondCo,thirdCo,time,mostersNum){
+	up=upK;
+	down=downK;
+	left=leftK;
+	right=rightK;
+	food_remain=ballsNum;
+	color_5_score=firstCo;
+	color_15_score=secondCo;
+	color_25_score=thirdCo;
+	timeLeft=time;
+	numOfMonster2=mostersNum;
+}
 
 function startGame(){
 	context = canvas.getContext("2d");
@@ -53,18 +75,18 @@ function Start() {
 	//board = new Array();
 	board=[
 		[4,4,4,4,4,4,4,4,4,4,4,4,4,4],
-		[4,4,4,4,4,4,4,4,4,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
-		[4,0,7,8,0,8,0,0,0,0,0,8,1,4],
+		[4,0,0,0,0,0,0,0,0,0,0,0,0,4],
+		[4,0,0,0,0,4,4,4,0,0,0,0,0,4],
+		[4,0,0,0,0,0,0,0,0,0,0,0,0,4],
+		[4,0,0,0,0,0,0,0,0,0,0,0,0,4],
+		[4,4,0,0,0,0,0,0,0,0,0,0,0,4],
+		[4,0,0,0,0,0,0,0,0,0,0,4,0,4],
+		[4,0,0,0,0,0,0,0,0,0,0,4,0,4],
+		[4,0,0,0,0,0,0,0,0,0,0,0,0,4],
+		[4,0,0,0,0,0,0,0,4,0,0,0,0,4],
+		[4,0,0,0,0,0,0,0,4,0,0,0,0,4],
+		[4,0,0,0,0,0,0,0,0,0,0,0,0,4],
+		[4,0,0,0,0,0,0,0,0,0,0,0,0,4],
 		[4,4,4,4,4,4,4,4,4,4,4,4,4,4]];
 
 
@@ -72,9 +94,9 @@ function Start() {
 	//test
 	pac_color = "yellow";
 	var cnt = 100;
-	var food_remain = 15;
-	var pacman_remain = 1;
+
 	start_time = new Date();
+
 
 	if(numOfMonster2==1){
 		monsters=[monster1];
@@ -85,11 +107,18 @@ function Start() {
 	else if(numOfMonster2==3){
 		monsters=[monster1,monster2,monster3];
 	}
+	else if(numOfMonster2==4){
+		monsters=[monster1,monster2,monster3,monster4];
+	}
 
 	var cellPac=findRandomEmptyCell(board);
-	shape.i = cellPac[0];
-	shape.j = cellPac[1];
-	board[shape.i,shape.j]=2;
+	while(cellPac[0]==1 || cellPac[0]==13 || cellPac[1]==1 ||cellPac[1]==13) {
+		 cellPac=findRandomEmptyCell(board);
+
+	}
+		shape.i = cellPac[0];
+		shape.j = cellPac[1];
+		board[shape.i][shape.j]=2;
 
 	// 				shape.j = j;
 	// 				pacman_remain--;
@@ -167,11 +196,36 @@ function Start() {
 	// }
 
 
+	var food5=food_remain*0.6;
+	var food15=food_remain*0.3;
+	var food25=food_remain*0.1;
 
-	while (food_remain > 0) {
+	while (food5 > 0) {
 		var emptyCell = findRandomEmptyCell(board);
+		while(cellPac[0]==1 || cellPac[0]==13 || cellPac[1]==1 ||cellPac[1]==13) {
+			 cellPac=findRandomEmptyCell(board);
+
+		}
 		board[emptyCell[0]][emptyCell[1]] = 1;
-		food_remain--;
+		food5--;
+	}
+	while (food15 > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		while(cellPac[0]==1 || cellPac[0]==13 || cellPac[1]==1 ||cellPac[1]==13) {
+			 cellPac=findRandomEmptyCell(board);
+
+		}
+		board[emptyCell[0]][emptyCell[1]] = 7;
+		food15--;
+	}
+	while (food25> 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		while(cellPac[0]==1 || cellPac[0]==13 || cellPac[1]==1 ||cellPac[1]==13) {
+			 cellPac=findRandomEmptyCell(board);
+
+		}
+		board[emptyCell[0]][emptyCell[1]] = 8;
+		food25--;
 	}
 	keysDown = {};
 	addEventListener(
@@ -262,18 +316,18 @@ function Draw() {
 
 			} else if (board[i][j] == 1) {
 				context.beginPath();
-				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
-				context.fillStyle = "red"; //color
+				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = getFirstColor(); //color
 				context.fill();
 			} else if (board[i][j] == 7) {
 				context.beginPath();
-				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
-				context.fillStyle = "blue"; //color
+				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = getSecondColor(); //color
 				context.fill();
 			} else if (board[i][j] == 8) {
 				context.beginPath();
-				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
-				context.fillStyle = "green"; //color
+				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = getThirdColor(); //color
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
@@ -690,14 +744,14 @@ function UpdatePositionMonster() {
 		board[shape.i][shape.j] = 2;
 		var currentTime = new Date();
 		time_elapsed = (currentTime - start_time) / 1000;
-		if(lives==0){
+		if(pacman_remain==0){
 			window.alert("Loser!");
 		}
 
 			for(var m=0; m<numOfMonster2; m++){
 				if(monsters[m].x1==shape.i && monsters[m].y1==shape.j){
 					score=score-10;
-					lives--;
+
 					//audio failed
 					//startGame();
 				}

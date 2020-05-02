@@ -265,7 +265,7 @@
 	let numberOfMonsters;
 
 	function getUpKey(){
-		 if(upKey!==null){
+		 if(upKey!==undefined){
 			 return upKey;
 		 }
 		 else{
@@ -274,7 +274,7 @@
 
 	}
 	function getDownKey(){
-		if(downKey!==null){
+		if(downKey!==undefined){
 			return downKey;
 		}
 		else{
@@ -282,7 +282,7 @@
 		}
 	}
 	function getLeftKey(){
-		if(leftKey!=null){
+		if(leftKey!=undefined){
 			return leftKey;
 		}
 		else{
@@ -290,7 +290,7 @@
 		}
 	}
 	function getRightKey(){
-		if(rightKey!==null){
+		if(rightKey!==undefined){
 			return rightKey;
 		}
 		else{
@@ -298,7 +298,7 @@
 		}
 	}
 	function getNumberOfBalls(){
-		if(numberOfBalls!==null){
+		if(numberOfBalls!==undefined){
 			return numberOfBalls;
 		}
 		else{
@@ -331,7 +331,7 @@
 		}
 	}
 	function getGameTime(){
-		if(gameTime!==null){
+		if(gameTime!==undefined){
 			return gameTime;
 		}
 		else{
@@ -339,7 +339,7 @@
 		}
 	}
 	function getNumberOfMonsters(){
-		if(numberOfMonsters!==null){
+		if(numberOfMonsters!==undefined){
 			return numberOfMonsters;
 		}
 		else{
@@ -347,9 +347,9 @@
 		}
 	}
 	
-	function $(){
-		return document.querySelector.apply(document,arguments);
-	}
+	// function $(){
+	// 	return document.querySelector.apply(document,arguments);
+	// }
 	
 
 	$("#upTarget").keydown(function (event) {
@@ -676,6 +676,7 @@
 							x.style.display = 'none';
 							var y = document.getElementById('game');
 							y.style.display='block'
+							initialize(getUpKey(),getDownKey(),getLeftKey(),getRightKey(),getNumberOfBalls(),getFirstColor(),getSecondColor(),getThirdColor(),getGameTime(),getNumberOfMonsters());
 							playMusic();
 							startGame();
 						}
