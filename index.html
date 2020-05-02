@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Blue Wave Template</title>
-	<meta name="keywords" content="" />
+<!--	<meta name="keywords" content="" />-->
 	<meta name="description" content="width=device-width, initial-scale=1.0" />
 	<link href="tooplate_style.css" rel="stylesheet" type="text/css" />
 	<!--   Free Website Template by t o o p l a t e . c o m   -->
@@ -67,7 +67,8 @@
 						<input id="lblTime" type="text" />
 					</div>
 					<br>
-				<canvas id="canvas" style="text-align: center;" height="600" width="600"></canvas>
+				<canvas id="canvas" style="text-align: center;" height="400" width="400"></canvas>
+				<img id="ghost" src="images/monster2.png" alt="" style="display: none"/>
 			</div>
 
 
@@ -262,6 +263,38 @@
 	let thirdColor="#0000ff";//blue as default
 	let gameTime;
 	let numberOfMonsters;
+
+	function getUpKey(){
+		return upKey;
+	}
+	function getDownKey(){
+		return downKey;
+	}
+	function getLeftKey(){
+		return leftKey;
+	}
+	function getRightKey(){
+		return rightKey;
+	}
+	function getNumberOfBalls(){
+		return numberOfBalls;
+	}
+	function getFirstColor(){
+		return firstColor;
+	}
+	function getSecondColor(){
+		return secondColor;
+	}
+	function getThirdColor(){
+		return thirdColor;
+	}
+	function getGameTime(){
+		return gameTime;
+	}
+	function getNumberOfMonsters(){
+		return numberOfMonsters;
+	}
+
 	$("#upTarget").keydown(function (event) {
 		if(event!=null){
 			if(event.key!=="Backspace"){
