@@ -11,20 +11,20 @@ var interval2;
 
 
 var monster1=new Object();
-monster1.x1=13;
-monster1.y1=13;
+monster1.x1=12;
+monster1.y1=12;
 
 var monster2=new Object();
 monster2.x1=1;
 monster2.y1=1;
 
 var monster3=new Object();
-monster3.x1=13;
+monster3.x1=12;
 monster3.y1=1;
 
 var monster4=new Object();
  monster4.x1=1;
- monster4.y1=13;
+ monster4.y1=12;
 
  var monsters;
 var pacman_remain = 5;
@@ -112,13 +112,17 @@ function Start() {
 	}
 
 	var cellPac=findRandomEmptyCell(board);
-	while(cellPac[0]==1 || cellPac[0]==13 || cellPac[1]==1 ||cellPac[1]==13) {
+	while(cellPac[0]==1 || cellPac[0]==12 || cellPac[1]==1 ||cellPac[1]==12) {
 		 cellPac=findRandomEmptyCell(board);
 
 	}
 		shape.i = cellPac[0];
 		shape.j = cellPac[1];
 		board[shape.i][shape.j]=2;
+
+		for(var f=0; f<numOfMonster2; f++ ){
+			board[monsters[f].x1][monsters[f].x1]=9;
+		}
 
 	// 				shape.j = j;
 	// 				pacman_remain--;
@@ -202,7 +206,7 @@ function Start() {
 
 	while (food5 > 0) {
 		var emptyCell = findRandomEmptyCell(board);
-		while(cellPac[0]==1 || cellPac[0]==13 || cellPac[1]==1 ||cellPac[1]==13) {
+		while(cellPac[0]==1 || cellPac[0]==12 || cellPac[1]==1 ||cellPac[1]==12) {
 			 cellPac=findRandomEmptyCell(board);
 
 		}
@@ -211,7 +215,7 @@ function Start() {
 	}
 	while (food15 > 0) {
 		var emptyCell = findRandomEmptyCell(board);
-		while(cellPac[0]==1 || cellPac[0]==13 || cellPac[1]==1 ||cellPac[1]==13) {
+		while(cellPac[0]==1 || cellPac[0]==12 || cellPac[1]==1 ||cellPac[1]==12) {
 			 cellPac=findRandomEmptyCell(board);
 
 		}
@@ -220,7 +224,7 @@ function Start() {
 	}
 	while (food25> 0) {
 		var emptyCell = findRandomEmptyCell(board);
-		while(cellPac[0]==1 || cellPac[0]==13 || cellPac[1]==1 ||cellPac[1]==13) {
+		while(cellPac[0]==1 || cellPac[0]==12 || cellPac[1]==1 ||cellPac[1]==12) {
 			 cellPac=findRandomEmptyCell(board);
 
 		}
@@ -338,6 +342,7 @@ function Draw() {
 			else if (board[i][j] == 9) {
 				var img = document.getElementById("ghost");
 				context.drawImage(img, center.x - 10, center.y - 10, 20, 20);
+
 
 			}
 		}
@@ -648,7 +653,10 @@ candy2.num=0;
 candy3.bool=false;
 candy3.num=0;
 
-candys=[candy1,candy2,candy3];
+var candy4=new Object();
+candy4.bool=false;
+candy4.num=0;
+candys=[candy1,candy2,candy3,candy4];
 
 
 
@@ -659,7 +667,12 @@ function UpdatePositionMonster() {
 	 //move=Math.floor(Math.random() * 10);
 
 	for(var o=0; o<numOfMonster2; o++){
-		board[monsters[o].x1][monsters[o].y1]=0;
+		if(candys[o].bool==true) {
+			board[monsters[o].x1][monsters[o].y1] = candys[o].num;
+		}
+		else {
+			board[monsters[o].x1][monsters[o].y1] = 0;
+		}
 		directions[o]=whichDirection(monsters[o]);
 	}
 
@@ -667,16 +680,32 @@ function UpdatePositionMonster() {
 	for(var c=0; c<numOfMonster2; c++) {
 		if (directions[c] == 3) {//left
 			monsters[c].x1--;
+			if(board[monsters[c].x1][monsters[c].y1]==1 || board[monsters[c].x1][monsters[c].y1]==7 || board[monsters[c].x1][monsters[c].y1]==8){
+				candys[c].num=board[monsters[c].x1][monsters[c].y1];
+				candys[c].bool=true;
+			}
 
 		}
 		else if (directions[c] == 4) {//right
 			monsters[c].x1++;
+			if(board[monsters[c].x1][monsters[c].y1]==1 || board[monsters[c].x1][monsters[c].y1]==7 || board[monsters[c].x1][monsters[c].y1]==8){
+				candys[c].num=board[monsters[c].x1][monsters[c].y1];
+				candys[c].bool=true;
+			}
 		}
 		else if (directions[c] == 1) {//up
 			monsters[c].y1--;
+			if(board[monsters[c].x1][monsters[c].y1]==1 || board[monsters[c].x1][monsters[c].y1]==7 || board[monsters[c].x1][monsters[c].y1]==8){
+				candys[c].num=board[monsters[c].x1][monsters[c].y1];
+				candys[c].bool=true;
+			}
 		}
 		else if (directions[c] == 2) {//down
 			monsters[c].y1++;
+			if(board[monsters[c].x1][monsters[c].y1]==1 || board[monsters[c].x1][monsters[c].y1]==7 || board[monsters[c].x1][monsters[c].y1]==8){
+				candys[c].num=board[monsters[c].x1][monsters[c].y1];
+				candys[c].bool=true;
+			}
 		}
 	}
 
@@ -710,7 +739,7 @@ function UpdatePositionMonster() {
 			}
 		}
 		if (x == 2) {//down
-			if (shape.j < 10 && board[shape.i][shape.j + 1] != 4) {
+			if (shape.j < 14 && board[shape.i][shape.j + 1] != 4) {
 				shape.j++;
 				angle.x = 0.7;
 				angle.y = 2.3;
@@ -724,7 +753,7 @@ function UpdatePositionMonster() {
 			}
 		}
 		if (x == 4) {//right
-			if (shape.i < 10 && board[shape.i + 1][shape.j] != 4) {
+			if (shape.i < 14 && board[shape.i + 1][shape.j] != 4) {
 				shape.i++;
 				angle.x = 0.15;
 				angle.y = 1.85;
@@ -760,7 +789,7 @@ function UpdatePositionMonster() {
 		 if (score >= 20 && time_elapsed <= 10) {
 			pac_color = "green";
 		}
-		if (score == 50) {
+		if (score == 1000) {
 			window.clearInterval(interval);
 			window.alert("Game completed");
 		} else {
