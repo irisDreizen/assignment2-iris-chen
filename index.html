@@ -79,7 +79,7 @@
 				<canvas id="canvas" style="text-align: center" height="450" width="450"></canvas>
 				<br/>
 				<br/>
-				<button onclick="startGame()">new game</button>
+				<button onclick="makeNewGame()">new game</button>
 				<br/>
 				<br/>
 				<div id="settingDetailsInGame">
@@ -877,6 +877,10 @@
 	function playMusic() {
 		var song = document.getElementById("myAudio");
 		song.play();
+	}
+	function makeNewGame() {
+		initialize(getUpKey(),getDownKey(),getLeftKey(),getRightKey(),getNumberOfBalls(),getFirstColor(),getSecondColor(),getThirdColor(),getGameTime(),getNumberOfMonsters());
+		startGame();
 	}
 
 </script>
