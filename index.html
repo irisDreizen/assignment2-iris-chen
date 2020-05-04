@@ -5,7 +5,7 @@
 	<title>Blue Wave Template</title>
 <!--	<meta name="keywords" content="" />-->
 	<meta name="description" content="width=device-width, initial-scale=1.0" />
-	<link href="tooplate_style.css" rel="stylesheet" type="text/css" />
+	<link href="css/tooplate_style.css" rel="stylesheet" type="text/css" />
 	<!--   Free Website Template by t o o p l a t e . c o m   -->
 	<script language="javascript" type="text/javascript">
 		function clearText(field)
@@ -14,8 +14,8 @@
 			else if (field.value == '') field.value = field.defaultValue;
 		}
 	</script>
-	<script src="./jquery-3.4.1.slim.min.js"></script>
-	<script type="text/javascript" src="./app.js"></script>
+	<script src="js/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 </head>
@@ -661,26 +661,6 @@
 		}
 	});
 
-	// function loginFunction() {
-	// 	var x = document.getElementById('welcome');
-	// 	if (x.style.display === 'none') {
-	// 		x.style.display = 'block';
-	// } else {
-	// 	x.style.display = 'none';
-	// 	var y = document.getElementById('login');
-	// 	y.style.display='block'
-	// }
-	// }
-	// function registerFunction() {
-	// 	var x = document.getElementById('welcome');
-	// 	if (x.style.display === 'none') {
-	// 		x.style.display = 'block';
-	// 	} else {
-	// 		x.style.display = 'none';
-	// 		var y = document.getElementById('register');
-	// 		y.style.display='block'
-	// 	}
-	// }
 
 	//function to store user name and password
 	function store () {
@@ -727,64 +707,6 @@
 						alert("successfully signed in, you are moving to game settings")
 						settingClick();
 						 currentUserName=inputUsername.value;
-						// var x = document.getElementById('login');
-						// if (x.style.display === 'none') {
-						// 	x.style.display = 'block';
-						// } else {
-						// 	x.style.display = 'none';
-						// 	var y = document.getElementById('game');
-						// 	y.style.display='block';
-						// 	var settingsDitails=document.getElementById("settingDetailsInGame");
-						// 	var p1 = document.createElement("p");
-						// 	var h1 = document.createElement("h1");
-						// 	var titleText = document.createTextNode("hello "+ currentUserName);
-						// 	var node1 = document.createTextNode("your number of balls is:"+getNumberOfBalls());
-						// 	var node2 = document.createTextNode("your first color is(5 points):"+getFirstColor());
-						// 	var node3 = document.createTextNode("your second color is(15 points)::"+getSecondColor());
-						// 	var node4 = document.createTextNode("your third color is(25 points):"+getThirdColor());
-						// 	var node5 = document.createTextNode(("your game time is:"+getGameTime()));
-						// 	var node6 = document.createTextNode("your number of monsters is:"+getNumberOfMonsters());
-						// 	var node7 = document.createTextNode("your up key is:"+getUpKey());
-						// 	var node8 = document.createTextNode("your down key is:"+getDownKey());
-						// 	var node9 = document.createTextNode("your left key is:"+getLeftKey());
-						// 	var node10= document.createTextNode("your right key is:"+getRightKey());
-						// 	var nodeBr1 = document.createElement("br");
-						// 	var nodeBr2 = document.createElement("br");
-						// 	var nodeBr3 = document.createElement("br");
-						// 	var nodeBr4 = document.createElement("br");
-						// 	var nodeBr5 = document.createElement("br");
-						// 	var nodeBr6 = document.createElement("br");
-						// 	var nodeBr7 = document.createElement("br");
-						// 	var nodeBr8 = document.createElement("br");
-						// 	var nodeBr9 = document.createElement("br");
-						// 	var nodeBr10 = document.createElement("br");
-						// 	p1.appendChild(node1);
-						// 	p1.appendChild(nodeBr1);
-						// 	p1.appendChild(node2);
-						// 	p1.appendChild(nodeBr2);
-						// 	p1.appendChild(node3);
-						// 	p1.appendChild(nodeBr3);
-						// 	p1.appendChild(node4);
-						// 	p1.appendChild(nodeBr4);
-						// 	p1.appendChild(node5);
-						// 	p1.appendChild(nodeBr5);
-						// 	p1.appendChild(node6);
-						// 	p1.appendChild(nodeBr6);
-						// 	p1.appendChild(node7);
-						// 	p1.appendChild(nodeBr7);
-						// 	p1.appendChild(node8);
-						// 	p1.appendChild(nodeBr8);
-						// 	p1.appendChild(node9);
-						// 	p1.appendChild(nodeBr9);
-						// 	p1.appendChild(node10);
-						// 	p1.appendChild(nodeBr10);
-						// 	h1.appendChild(titleText);
-						// 	settingsDitails.appendChild(h1);
-						// 	settingsDitails.appendChild(p1);
-						// 	initialize(getUpKey(),getDownKey(),getLeftKey(),getRightKey(),getNumberOfBalls(),getFirstColor(),getSecondColor(),getThirdColor(),getGameTime(),getNumberOfMonsters());
-						// 	playMusic();
-						// 	startGame();
-						// }
 					}
 					else{
 						alert("you don't have an account, please register")
@@ -802,17 +724,6 @@
 			alert("wrong arguments")
 		}
 
-	}
-
-	function gameClick() {
-		var welcomeDiv = document.getElementById('welcome');
-		if (welcomeDiv.style.display === 'none') {
-			welcomeDiv.style.display = 'block';
-		} else {
-			welcomeDiv.style.display = 'none';
-			var y = document.getElementById('game');
-			y.style.display='block'
-		}
 	}
 
 	function settingClick() {
@@ -928,7 +839,7 @@
 		p1.setAttribute("id", "p1");
 		var h1 = document.createElement("h1");
 		h1.setAttribute("id","h1");
-		var titleText = document.createTextNode("hello "+ currentUserName);
+		var titleText = document.createTextNode("hello "+ getUserName());
 		var node1 = document.createTextNode("your number of balls is:"+getNumberOfBalls());
 		var node2 = document.createTextNode("your first color is(5 points):"+getFirstColor());
 		var node3 = document.createTextNode("your second color is(15 points)::"+getSecondColor());

@@ -11,7 +11,7 @@ body {
 	font-size: 13px;
 	line-height: 1.7em;
 	background-color: #fff;
-	background-image:url(images/tooplate_body.jpg);
+	background-image:url(../images/tooplate_body.jpg);
 	background-position: top;
 	background-repeat: repeat-x
 }
@@ -115,14 +115,14 @@ h6 { font-size: 14px; margin: 0 0 5px; padding: 0; }
 	width: 960px;
 	padding: 0 9px;
 	margin: 0 auto;
-	background: url(images/tooplate_wrapper.png) repeat-y
+	background: url(../images/tooplate_wrapper.png) repeat-y
 }
 
 #tooplate_header {
 	width: 880px;
 	height: 230px;
 	padding: 0 40px;
-	background: url(images/tooplate_header.jpg) no-repeat
+	background: url(../images/tooplate_header.jpg) no-repeat
 }
 .logo_and_names{
 	display: inline-flex;
@@ -185,7 +185,7 @@ h6 { font-size: 14px; margin: 0 0 5px; padding: 0; }
 
 #tooplate_menu ul li a:hover, #tooplate_menu ul li .current { 
 	color: #000; 
-	background: url(images/tooplate_menu_hover.png) center bottom no-repeat; 
+	background: url(../images/tooplate_menu_hover.png) center bottom no-repeat;
 }
 /* end of menu */
 
@@ -235,7 +235,7 @@ h6 { font-size: 14px; margin: 0 0 5px; padding: 0; }
 	width: 880px;
 	height: 30px;
 	padding: 20px 40px;
-	background: url(images/tooplate_middle.jpg) no-repeat;
+	background: url(../images/tooplate_middle.jpg) no-repeat;
 }
 
 
@@ -244,7 +244,7 @@ h6 { font-size: 14px; margin: 0 0 5px; padding: 0; }
 	width: 880px;
 	/*height: 1000px;*/
 	padding: 10px 40px 0;
-	background: url(images/tooplate_main.jpg) no-repeat top
+	background: url(../images/tooplate_main.jpg) no-repeat top
 }
 
 
