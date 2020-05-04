@@ -1,5 +1,5 @@
 שמות מגישים :איריס דרייזנשטוק- ת"ז 315790410 חן אברהם 205859655 
-Link to our game-
+Link to our game- https://sise-web-development-environments.github.io/assignment2-iris-chen/
 
 Welcome to our PackWoman Game!
 
