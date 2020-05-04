@@ -121,6 +121,7 @@ function Start() {
 	var cnt = 100;
 
 	start_time = new Date();
+	start_time=start_time/1000;
 
 	minion.i=6;
 	minion.j=6;
@@ -448,16 +449,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {//UP
+	if (keysDown[up]) {//UP
 		return 1;
 	}
-	if (keysDown[40]) {//down
+	if (keysDown[down]) {//down
 		return 2;
 	}
-	if (keysDown[37]) {//left
+	if (keysDown[left]) {//left
 		return 3;
 	}
-	if (keysDown[39]) {//right
+	if (keysDown[right]) {//right
 		return 4;
 	}
 }
@@ -488,28 +489,28 @@ function Draw() {
 
 			} else if (board[i][j] == 1) {
 				context.beginPath();
-				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 7, 0, 2 * Math.PI); // circle
 				context.fillStyle = getFirstColor(); //color
 				context.fill();
 			} else if (board[i][j] == 7) {
 				context.beginPath();
-				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 7, 0, 2 * Math.PI); // circle
 				context.fillStyle = getSecondColor(); //color
 				context.fill();
 			} else if (board[i][j] == 8) {
 				context.beginPath();
-				context.arc(center.x, center.y, 5, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 7, 0, 2 * Math.PI); // circle
 				context.fillStyle = getThirdColor(); //color
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
-				context.rect(center.x - 10, center.y - 10, 30, 30);
+				context.rect(center.x - 10, center.y - 10	, 30, 30);
 				context.fillStyle = "blue"; //color
 				context.fill();
 			}
 			else if (board[i][j] == 9) {
 				var img = document.getElementById("ghost");
-				context.drawImage(img, center.x - 10, center.y - 10, 20, 20);
+				context.drawImage(img, center.x -10, center.y - 10, 20, 20);
 
 
 			}
@@ -1299,7 +1300,8 @@ function whichDirection(monster) {
 		}
 		board[shape.i][shape.j] = 2;
 		var currentTime = new Date();
-		time_elapsed = (timeLeft - (currentTime - start_time));
+		currentTime=currentTime/1000;
+		time_elapsed = Math.floor(timeLeft - (currentTime - start_time));
 		if (pacman_remain == 0) {
 			window.clearInterval(interval);
 			window.alert("Loser!");
