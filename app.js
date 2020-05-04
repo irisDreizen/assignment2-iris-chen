@@ -31,7 +31,7 @@ var monster4=new Object();
  monster4.y1=12;
 
  var monsters;
-var pacman_remain = 5;
+var pacman_remain ;
 
 var randomNum3=Math.random();
 
@@ -66,7 +66,7 @@ function startGame(){
 	Start();
 }
 
-var x=document.getElementById("myAudio");
+
 //
 // function playAudio() {
 // 	x.play();
@@ -77,7 +77,10 @@ function Start() {
 	window.clearInterval(interval);
 	window.clearInterval(monsterInterval);
 	window.clearInterval(minionInterval);
-
+	score = 0;
+	pacman_remain = 5;
+	start_time = new Date();
+	start_time=start_time/1000;
 
 	//playAudio();
 
@@ -115,13 +118,12 @@ function Start() {
 	monster4.y1=12;
 
 
-		score = 0;
+
 	//test
 	pac_color = "yellow";
 	var cnt = 100;
 
-	start_time = new Date();
-	start_time=start_time/1000;
+
 
 	minion.i=6;
 	minion.j=6;
@@ -467,6 +469,7 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
+	lblStrikes.value=pacman_remain;
 	for (var i = 0; i < 14; i++) {
 		for (var j = 0; j < 14; j++) {
 			var center = new Object();
@@ -560,30 +563,40 @@ function moveDown(monster) {
 function whichDirection(monster) {
 	var move=false;
 	while (monster.x1 == shape.i && monster.y1 > shape.j && move==false) {//same row up or right first
+		random4 = Math.floor(Math.random() * 11);//integer from 0 to 10
 		if (random4 <= 5) {
 			if (moveUp(monster) == 1) {
-				move=true;
+				move = true;
 				return 1;
-			} else if (random4 >= 3) {
+			} else if (moveRight(monster) == 4) {
+				move = true;
+				return 4;
+			} else if (moveLeft(monster) == 3) {
+				move = true;
+				return 3;
+			} else if (moveDown(monster) == 2) {
+				move = true;
+				return 2;
+			} else {
 				if (moveRight(monster) == 4) {
-					move=true;
+					move = true;
 					return 4;
-				} else if (moveLeft(monster) == 3) {
-					move=true;
-					return 3;
-				} else if (moveDown(monster)==2){
-					move=true;
+				} else if (moveUp(monster) == 1) {
+					move = true;
+					return 1;
+				} else if (moveDown(monster) == 2) {
+					move = true;
 					return 2;
 				}
-
 			}
 		}
+
 		else {//>5
 			if(moveRight(monster)==4) {
 				move=true;
 				return 4;
 			}
-			else if(random4>=7) {
+			else  {
 				if (moveUp(monster) == 1) {
 					move=true;
 					return 1;
@@ -610,7 +623,7 @@ function whichDirection(monster) {
 			if (moveDown(monster) == 2) {
 				move = true;
 				return 2;
-			} else if (random4 >= 3) {
+			} else  {
 				if (moveRight(monster) == 4) {
 					move = true;
 					return 4;
@@ -627,7 +640,7 @@ function whichDirection(monster) {
 			if (moveRight(monster) == 4) {
 				move = true;
 				return 4;
-			} else if (random4 >= 7) {
+			} else  {
 				if (moveDown(monster) == 2) {
 					move = true;
 					return 2;
@@ -651,7 +664,7 @@ function whichDirection(monster) {
 			if (moveLeft(monster) == 3) {
 				move = true;
 				return 3;
-			} else if (random4 >= 3) {
+			} else  {
 				if (moveUp(monster) == 1) {
 					move = true;
 					return 1;
@@ -668,7 +681,7 @@ function whichDirection(monster) {
 			if (moveUp(monster) == 1) {
 				move = true;
 				return 1;
-			} else if (random4 >= 7) {
+			} else  {
 				if (moveLeft(monster) == 3) {
 					move = true;
 					return 3;
@@ -691,7 +704,7 @@ function whichDirection(monster) {
 			if (moveRight(monster) == 4) {
 				move = true;
 				return 4;
-			} else if (random4 >= 3) {
+			} else  {
 				if (moveUp(monster) == 1) {
 					move = true;
 					return 1;
@@ -714,7 +727,7 @@ function whichDirection(monster) {
 				move = true;
 				return 1;
 
-			} else if (random4 >= 7) {
+			} else  {
 				if (moveRight(monster) == 4) {
 					move = true;
 					return 4;
@@ -738,7 +751,7 @@ function whichDirection(monster) {
 			if (moveUp(monster) == 1) {
 				move = true;
 				return 1;
-			} else if (random4 >= 3) {
+			} else  {
 				if (moveLeft(monster) == 3) {
 					move = true;
 					return 3;
@@ -755,7 +768,7 @@ function whichDirection(monster) {
 			if (moveLeft(monster) == 3) {
 				move = true;
 				return 3;
-			} else if (random4 >= 7) {
+			} else  {
 				if (moveUp(monster) == 1) {
 					move = true;
 					return 1;
@@ -777,7 +790,7 @@ function whichDirection(monster) {
 			if (moveLeft(monster) == 3) {
 				move = true;
 				return 3;
-			} else if (random4 >= 3) {
+			} else  {
 				if (moveDown(monster) == 2) {
 					return 2;
 				} else if (moveUp(monster) == 1) {
@@ -789,7 +802,7 @@ function whichDirection(monster) {
 		} else {//>5
 			if (moveDown(monster) == 2) {
 				return 2;
-			} else if (random4 >= 7) {
+			} else  {
 				if (moveLeft(monster) == 3) {
 					return 3;
 				} else if (moveRight(monster) == 4) {
@@ -808,7 +821,7 @@ function whichDirection(monster) {
 		if (random4 <= 5) {
 			if (moveDown(monster) == 2) {
 				return 2;
-			} else if (random4 >= 3) {
+			} else  {
 				if (moveRight(monster) == 4) {
 					return 4;
 				} else if (moveUp(monster) == 1) {
@@ -821,7 +834,7 @@ function whichDirection(monster) {
 		} else {//>5
 			if (moveRight(monster) == 4) {
 				return 4;
-			} else if (random4 >= 7) {
+			} else  {
 				if (moveDown(monster) == 2) {
 					return 2;
 				} else if (moveUp(monster) == 1) {
@@ -841,7 +854,7 @@ function whichDirection(monster) {
 			if(moveUp(monster)==1) {
 				return 1;
 			}
-			else if(random4>=3) {
+			else  {
 				if (moveRight(monster) == 4) {
 					return 4;
 				}
@@ -859,9 +872,10 @@ function whichDirection(monster) {
 				return 4;
 			}
 			else {
-				if(random4>=7) {
-					if (moveUp(monster) == 1)
+
+					if (moveUp(monster) == 1) {
 						return 1;
+					}
 					else if (moveDown(monster) == 2) {
 						return 2;
 					} else if (moveLeft(monster) == 3) {
@@ -872,7 +886,7 @@ function whichDirection(monster) {
 		}
 
 
-	}
+
 
 	// var move = false;
 	//
@@ -1107,6 +1121,7 @@ function whichDirection(monster) {
 
 
 	function shapeDie() {
+		eatedSound();
 		score = score - 10;
 		pacman_remain--;
 		var newShape = findRandomEmptyCell(board);
@@ -1114,49 +1129,49 @@ function whichDirection(monster) {
 		board[shape.i][shape.j] = 0;
 		shape.i = newShape[0];
 		shape.j = newShape[1];
-		for (var m = 0; m < numOfMonster2; m++) {
-			if (m == 0) {
-				if (candys[m].bool == true) {
-					board[monsters[m].x1][monsters[m].y1] = candys[m].num;
-				} else {
-					board[monsters[m].x1][monsters[m].y1] = 0;
-
-				}
-				monsters[m].x1 = 12;
-				monsters[m].y1 = 12;
-			}
-			if (m == 1) {
-				if (candys[m].bool == true) {
-					board[monsters[m].x1][monsters[m].y1] = candys[m].num;
-				} else {
-					board[monsters[m].x1][monsters[m].y1] = 0;
-
-				}
-				monsters[m].x1 = 1;
-				monsters[m].y1 = 1;
-			}
-			if (m == 2) {
-				if (candys[m].bool == true) {
-					board[monsters[m].x1][monsters[m].y1] = candys[m].num;
-				} else {
-					board[monsters[m].x1][monsters[m].y1] = 0;
-
-				}
-				monsters[m].x1 = 12;
-				monsters[m].y1 = 1;
-			}
-			if (m == 3) {
-				if (candys[m].bool == true) {
-					board[monsters[m].x1][monsters[m].y1] = candys[m].num;
-				} else {
-					board[monsters[m].x1][monsters[m].y1] = 0;
-
-				}
-				monsters[m].x1 = 1;
-				monsters[m].y1 = 12;
-			}
-
-		}
+		// for (var m = 0; m < numOfMonster2; m++) {
+		// 	if (m == 0) {
+		// 		if (candys[m].bool == true) {
+		// 			board[monsters[m].x1][monsters[m].y1] = candys[m].num;
+		// 		} else {
+		// 			board[monsters[m].x1][monsters[m].y1] = 0;
+		//
+		// 		}
+		// 		monsters[m].x1 = 12;
+		// 		monsters[m].y1 = 12;
+		// 	}
+		// 	if (m == 1) {
+		// 		if (candys[m].bool == true) {
+		// 			board[monsters[m].x1][monsters[m].y1] = candys[m].num;
+		// 		} else {
+		// 			board[monsters[m].x1][monsters[m].y1] = 0;
+		//
+		// 		}
+		// 		monsters[m].x1 = 1;
+		// 		monsters[m].y1 = 1;
+		// 	}
+		// 	if (m == 2) {
+		// 		if (candys[m].bool == true) {
+		// 			board[monsters[m].x1][monsters[m].y1] = candys[m].num;
+		// 		} else {
+		// 			board[monsters[m].x1][monsters[m].y1] = 0;
+		//
+		// 		}
+		// 		monsters[m].x1 = 12;
+		// 		monsters[m].y1 = 1;
+		// 	}
+		// 	if (m == 3) {
+		// 		if (candys[m].bool == true) {
+		// 			board[monsters[m].x1][monsters[m].y1] = candys[m].num;
+		// 		} else {
+		// 			board[monsters[m].x1][monsters[m].y1] = 0;
+		//
+		// 		}
+		// 		monsters[m].x1 = 1;
+		// 		monsters[m].y1 = 12;
+		// 	}
+		//
+		// }
 
 
 	}
@@ -1214,6 +1229,7 @@ function whichDirection(monster) {
 			}
 
 			if (monsters[c].x1 == shape.i && monsters[c].y1 == shape.j) {
+
 				shapeDie();
 			}
 
@@ -1274,8 +1290,24 @@ function whichDirection(monster) {
 			minion.j = -1;
 			window.clearInterval(minionInterval)
 		}
+		var counter=0;
+		for (var i = 0; i < 14; i++) {
+			for (var j = 0; j < 14; j++) {
+					if(board[i][j]==1  || board[i][j]==7 ||board[i][j]==8){
+						counter++;
+					}
+			}
+		}
+		if(counter==0){
+			window.clearInterval(interval);
+			window.clearInterval(monsterInterval);
+			window.alert("Winner");
+		}
 		for (var m = 0; m < numOfMonster2; m++) {
 			if (monsters[m].x1 == shape.i && monsters[m].y1 == shape.j) {
+				// if(board[shape.i][shape.j] == 1  || board[shape.i][shape.j] == 7 || board[shape.i][shape.j] == 8) {
+				// 	food_remain--;
+				// }
 				shapeDie();
 			}
 		}
@@ -1303,17 +1335,21 @@ function whichDirection(monster) {
 		time_elapsed = Math.floor(timeLeft - (currentTime - start_time));
 		if (pacman_remain == 0) {
 			window.clearInterval(interval);
+			window.clearInterval(monsterInterval);
 			window.alert("Loser!");
 		}
 		if (food_remain == 0) {
 			window.clearInterval(interval);
+			window.clearInterval(monsterInterval);
 			window.alert("Winner");
 		}
 		if (time_elapsed <= 0 && score < 100) {
 			window.clearInterval(interval);
-			window.alert("You are better than" + "" + score + " points!");
+			window.clearInterval(monsterInterval);
+			window.alert("You are better than" + " " + score + " points!");
 
 		} else if (time_elapsed <= 0) {
+			window.clearInterval(monsterInterval);
 			window.clearInterval(interval);
 			window.alert("Loser!");
 
@@ -1326,6 +1362,7 @@ function whichDirection(monster) {
 		stopMusic();
 		var eatedSound = document.getElementById("eated");
 		eatedSound.play();
+		playMusic();
 	}
 
 
