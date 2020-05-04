@@ -443,7 +443,6 @@ function findRandomEmptyCell(board) {
 	while (board[i][j] != 0) {
 		i = Math.floor(Math.random() * 13 + 1);
 		j = Math.floor(Math.random() * 13 + 1);
-		console.log("my i is: " + i+ " and my j is:"+ j);
 	}
 	return [i, j];
 }
@@ -1322,6 +1321,11 @@ function whichDirection(monster) {
 
 			Draw();
 		}
+	}
+	function eatedSound() {
+		stopMusic();
+		var eatedSound = document.getElementById("eated");
+		eatedSound.play();
 	}
 
 

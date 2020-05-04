@@ -29,7 +29,7 @@
 			<ul>
 				<li><a href="index.html" class="current">Welcome</a></li>
 <!--				<li onclick="gameClick()"><a>Game</a></li>-->
-				<li onclick="settingClick()"><a>Setting</a></li>
+				<li onclick="settingClick()"><a>Settings</a></li>
 				<li onclick="loginClick()"><a>Login</a></li>
 				<li onclick="registerClick()"><a>Register</a></li>
 				<li><a id="about">About</a></li>
@@ -57,6 +57,10 @@
 					<source src="audio/packmanSong.mp3" type="audio/mpeg">
 					If you're reading this, audio isn't supported.
 				</audio>
+				<audio hidden id="eated">
+					<source src="audio/eated.mp3" type="audio/mpeg">
+					If you're reading this, audio isn't supported.
+				</audio>
 					<div id="score">
 						<label for="lblScore">SCORE:</label>
 						<input id="lblScore" type="text" />
@@ -66,6 +70,11 @@
 						<label for="lblTime">TIME:</label>
 						<input id="lblTime" type="text" />
 					</div>
+				<br/>
+				<div id="strikes" class="strikes">
+					<label for="lblStrikes">STRIKES:</label>
+					<input id="lblStrikes" type="text" />
+				</div>
 					<br>
 				<canvas id="canvas" style="text-align: center" height="450" width="450"></canvas>
 				<br/>
@@ -200,19 +209,19 @@
 
 			<div id="setting" style="display: none">
 				<form action="" name="settingsForm" id="settingsForm">
-					<label  for="upTarget">please enter a key of your up move:</label>
+					<label  for="upTarget">please press a key of your up move:</label>
 					<input id="upTarget" name="upTarget1" type="text">
 					<br>
 					<br>
-					<label for="downTarget">please enter a key of your down move:</label>
+					<label for="downTarget">please press a key of your down move:</label>
 					<input id="downTarget" name="downTarget1" type="text">
 					<br>
 					<br>
-					<label for="leftTarget">please enter a key of your left move:</label>
+					<label for="leftTarget">please press a key of your left move:</label>
 					<input id="leftTarget" name="leftTarget1" type="text">
 					<br>
 					<br>
-					<label for="rightTarget">please enter a key of your right move:</label>
+					<label for="rightTarget">please press a key of your right move:</label>
 					<input id="rightTarget" name="rightTarget1" type="text">
 					<br>
 					<br>
@@ -276,6 +285,7 @@
 	let thirdColor="#0000ff";//blue as default
 	let gameTime;
 	let numberOfMonsters;
+	let currentUserName;
 
 	function getUpKey(){
 		 if(upKey!==undefined){
@@ -356,7 +366,7 @@
 			return gameTime;
 		}
 		else{
-			gameTime=Math.floor(Math.random()*(10000000-60)+60);
+			gameTime=Math.floor(Math.random()*(1000-60)+60);
 			return gameTime;
 		}
 	}
@@ -370,6 +380,10 @@
 		}
 	}
 
+	function getUserName(){
+		return currentUserName;
+	}
+
 	window.addEventListener("keydown",function (e) {
 		if([32,37,38,39,40].indexOf(e.keyCode)>-1){
 			e.preventDefault();
@@ -380,7 +394,10 @@
 		if(event!=null){
 			if(event.key!=="Backspace"){
 					upKey=event.keyCode;
-					alert("the key you chose:"+event.key)
+					if(upKey===37 || upKey===38 || upKey===39 || upKey===40){
+						document.getElementById("upTarget").value=event.key;
+						//alert("the key you chose:"+event.key)
+					}
 			}
 			else{
 				alert("you are not allowed to choose Backspace");
@@ -391,7 +408,10 @@
 		if(event!=null){
 			if(event.key!=="Backspace"){
 				downKey=event.keyCode;
-				alert("the key you chose:"+event.key)
+				if(downKey===37 || downKey===38 || downKey===39 || downKey===40){
+					document.getElementById("downTarget").value=event.key;
+					//alert("the key you chose:"+event.key)
+				}
 			}
 			else{
 				alert("you are not allowed to choose Backspace");
@@ -402,7 +422,10 @@
 		if(event!=null){
 			if(event.key!=="Backspace"){
 				leftKey=event.keyCode;
-				alert("the key you chose:"+event.key)
+				if(leftKey===37 || leftKey===38 || leftKey===39 || leftKey===40){
+					document.getElementById("leftTarget").value=event.key;
+					//alert("the key you chose:"+event.key)
+				}
 			}
 			else{
 				alert("you are not allowed to choose Backspace");
@@ -413,7 +436,10 @@
 		if(event!=null){
 			if(event.key!=="Backspace"){
 				rightKey=event.keyCode;
-				alert("the key you chose:"+event.key)
+				if(rightKey===37 || rightKey===38 || rightKey===39 || rightKey===40){
+					document.getElementById("rightTarget").value=event.key;
+					//alert("the key you chose:"+event.key)
+				}
 			}
 			else{
 				alert("you are not allowed to choose Backspace");
@@ -438,7 +464,7 @@
 		document.getElementById("secondColor").value=secondColor;
 		thirdColor=getRandomColor();
 		document.getElementById("thirdColor").value=thirdColor;
-		gameTime=Math.floor(Math.random()*(10000000-60)+60);
+		gameTime=Math.floor(Math.random()*(1000-60)+60);
 		document.getElementById("gameTime").value=gameTime;
 		numberOfMonsters=Math.floor(Math.random()*(4-1)+1);
 		document.getElementById("numOfMonsters").value=numberOfMonsters;
@@ -689,15 +715,18 @@
 				if(localStorage.getItem(inputUsername.value)!=null){
 					if(localStorage.getItem(inputUsername.value)===inputPassword.value){
 						alert("successfully signed in")
+						currentUserName=inputUsername.value;
 						var x = document.getElementById('login');
 						if (x.style.display === 'none') {
 							x.style.display = 'block';
 						} else {
 							x.style.display = 'none';
 							var y = document.getElementById('game');
-							y.style.display='block'
+							y.style.display='block';
 							var settingsDitails=document.getElementById("settingDetailsInGame");
 							var p1 = document.createElement("p");
+							var h1 = document.createElement("h1");
+							var titleText = document.createTextNode("hello "+ currentUserName);
 							var node1 = document.createTextNode("your number of balls is:"+getNumberOfBalls());
 							var node2 = document.createTextNode("your first color is(5 points):"+getFirstColor());
 							var node3 = document.createTextNode("your second color is(15 points)::"+getSecondColor());
@@ -738,6 +767,8 @@
 							p1.appendChild(nodeBr9);
 							p1.appendChild(node10);
 							p1.appendChild(nodeBr10);
+							h1.appendChild(titleText);
+							settingsDitails.appendChild(h1);
 							settingsDitails.appendChild(p1);
 							initialize(getUpKey(),getDownKey(),getLeftKey(),getRightKey(),getNumberOfBalls(),getFirstColor(),getSecondColor(),getThirdColor(),getGameTime(),getNumberOfMonsters());
 							playMusic();
