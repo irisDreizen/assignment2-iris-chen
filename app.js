@@ -1337,21 +1337,28 @@ function whichDirection(monster) {
 			window.clearInterval(interval);
 			window.clearInterval(monsterInterval);
 			window.alert("Loser!");
+			stopMusic();
+
 		}
 		if (food_remain == 0) {
 			window.clearInterval(interval);
 			window.clearInterval(monsterInterval);
 			window.alert("Winner");
+			stopMusic();
 		}
 		if (time_elapsed <= 0 && score < 100) {
 			window.clearInterval(interval);
 			window.clearInterval(monsterInterval);
 			window.alert("You are better than" + " " + score + " points!");
+			stopMusic();
+
 
 		} else if (time_elapsed <= 0) {
 			window.clearInterval(monsterInterval);
 			window.clearInterval(interval);
 			window.alert("Loser!");
+			stopMusic();
+
 
 		} else {
 
@@ -1363,6 +1370,12 @@ function whichDirection(monster) {
 		var eatedSound = document.getElementById("eated");
 		eatedSound.play();
 		playMusic();
+	}
+	function stopGame() {
+		stopMusic();
+		clearInterval(interval);
+		clearInterval(monsterInterval);
+		clearInterval(minionInterval);
 	}
 
 
