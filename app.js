@@ -507,7 +507,7 @@ function Draw() {
 			} else if (board[i][j] == 4) {
 				context.beginPath();
 				context.rect(center.x - 10, center.y - 10	, 30, 30);
-				context.fillStyle = "blue"; //color
+				context.fillStyle = "DeepSkyBlue"; //color
 				context.fill();
 			}
 			else if (board[i][j] == 9) {
@@ -1325,7 +1325,7 @@ function whichDirection(monster) {
 
 
 		} else if (board[shape.i][shape.j] == 5) {
-			score = score + 45;
+			score = score + 16;
 		} else if (board[shape.i][shape.j] == 3) {
 			score = score + 50;
 		}
@@ -1353,7 +1353,14 @@ function whichDirection(monster) {
 			stopMusic();
 
 
-		} else if (time_elapsed <= 0) {
+		}
+		else if (time_elapsed <= 0 && score >= 100){
+			window.clearInterval(interval);
+			window.clearInterval(monsterInterval);
+			window.alert("Winner");
+			stopMusic();
+		}
+			else if (time_elapsed <= 0) {
 			window.clearInterval(monsterInterval);
 			window.clearInterval(interval);
 			window.alert("Loser!");
