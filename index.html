@@ -106,12 +106,12 @@
 					<img id="welcome_logo" src="images/tooplate_logo.png">
 					<br/>
 					<br/>
-					<button class="button" onclick="registerFunction()"><span>Register</span></button>
+					<button class="button" onclick="registerClick()"><span>Register</span></button>
 					<br/>
 					<br/>
 					<br/>
 					<br/>
-					<button class="button" onclick="loginFunction()"><span>Login</span></button>
+					<button class="button" onclick="loginClick()"><span>Login</span></button>
 					<br/>
 					<br/>
 					<br/>
@@ -156,7 +156,7 @@
 
 			<div align="center" id="register" style="display: none">
 
-				<form action="" name="registration" id="registerForm">
+				<form action="" name="registration" id="registerForm" autocomplete="off">
 					<h2>Register</h2>
 					<p>Please enter your details here</p>
 					<br/>
@@ -200,8 +200,8 @@
 				<div class="modal-content">
 					<span class="close1">&times;</span>
 					<p class="aboutParagraph">created by: Iris Dreizenshtok & Chen Avraham</p>
-					<p class="aboutParagraph">this work is part of second assignment in Web Development Enviroment course. As part of building thos website we used Validate Plugin of JQuery. In Addition, we used a design template. </p>
-					<p class="aboutParagraph">the difficulties in this assignment were to understand how the plugin works and how to match it to our use</p>
+					<p class="aboutParagraph">this work is part of second assignment in Web Development Enviroment course. As part of building this website we used Validate Plugin of JQuery. In Addition, we used a design template. </p>
+					<p class="aboutParagraph">the difficulties in this assignment were to understand how the plugin works and how to match it to our user. In addition it was not easy to handle all the edge cases of the game</p>
 
 				</div>
 
@@ -249,7 +249,7 @@
 					<input id="numOfMonsters" name="numOfMonsters1" type="text">
 					<br>
 					<br>
-					<button class="myButton" >update</button>     </form>   <button class="myButton" onclick="enterRandomValues()">random values</button>
+					<button class="myButton" >update and play</button>     </form>   <button class="myButton" onclick="enterRandomValues()">random values</button>
 					<br>
 					<br>
 
@@ -385,7 +385,7 @@
 	}
 
 	window.addEventListener("keydown",function (e) {
-		if([32,37,38,39,40].indexOf(e.keyCode)>-1){
+		if([9,32,37,38,39,40].indexOf(e.keyCode)>-1){
 			e.preventDefault();
 		}
 	},false);
@@ -396,7 +396,7 @@
 					upKey=event.keyCode;
 					if(upKey===37 || upKey===38 || upKey===39 || upKey===40){
 						document.getElementById("upTarget").value=event.key;
-						//alert("the key you chose:"+event.key)
+					//	alert("the key you chose:"+event.key)
 					}
 			}
 			else{
@@ -531,6 +531,12 @@
 			modal.style.display = "none";
 		}
 	}
+	$(document).keydown(function(e) {
+		var code = e.keyCode;
+		if (code ===27){
+				modal.style.display = 'none';
+		}
+	});
 
 
 	$(document).ready(function () {
@@ -651,29 +657,30 @@
 		// in the "action" attribute of the form when valid
 		submitHandler: function() {
 			updateFunction();
+			goToGame();
 		}
 	});
 
-	function loginFunction() {
-		var x = document.getElementById('welcome');
-		if (x.style.display === 'none') {
-			x.style.display = 'block';
-		} else {
-			x.style.display = 'none';
-			var y = document.getElementById('login');
-			y.style.display='block'
-		}
-	}
-	function registerFunction() {
-		var x = document.getElementById('welcome');
-		if (x.style.display === 'none') {
-			x.style.display = 'block';
-		} else {
-			x.style.display = 'none';
-			var y = document.getElementById('register');
-			y.style.display='block'
-		}
-	}
+	// function loginFunction() {
+	// 	var x = document.getElementById('welcome');
+	// 	if (x.style.display === 'none') {
+	// 		x.style.display = 'block';
+	// } else {
+	// 	x.style.display = 'none';
+	// 	var y = document.getElementById('login');
+	// 	y.style.display='block'
+	// }
+	// }
+	// function registerFunction() {
+	// 	var x = document.getElementById('welcome');
+	// 	if (x.style.display === 'none') {
+	// 		x.style.display = 'block';
+	// 	} else {
+	// 		x.style.display = 'none';
+	// 		var y = document.getElementById('register');
+	// 		y.style.display='block'
+	// 	}
+	// }
 
 	//function to store user name and password
 	function store () {
@@ -683,7 +690,9 @@
 			if(inputPassword!=null) {
 				if (localStorage.getItem(inputUsername.value) === null) {
 					localStorage.setItem(inputUsername.value, inputPassword.value);
-					alert("successful registration")
+					currentUserName=inputUsername.value;
+					alert("successful registration, you are moving to game settings")
+					settingClick();
 				}
 				else{
 					if(localStorage.getItem(inputUsername.value)===inputPassword.value){
@@ -708,72 +717,74 @@
 
 	//function to sign in
 	function login() {
+		setDefaultUser();
 		let inputUsername = document.getElementById("username_login") ;
 		let inputPassword = document.getElementById("password_login");
 		if ( inputUsername.value != null){
 			if(inputPassword.value !=null){
 				if(localStorage.getItem(inputUsername.value)!=null){
 					if(localStorage.getItem(inputUsername.value)===inputPassword.value){
-						alert("successfully signed in")
-						currentUserName=inputUsername.value;
-						var x = document.getElementById('login');
-						if (x.style.display === 'none') {
-							x.style.display = 'block';
-						} else {
-							x.style.display = 'none';
-							var y = document.getElementById('game');
-							y.style.display='block';
-							var settingsDitails=document.getElementById("settingDetailsInGame");
-							var p1 = document.createElement("p");
-							var h1 = document.createElement("h1");
-							var titleText = document.createTextNode("hello "+ currentUserName);
-							var node1 = document.createTextNode("your number of balls is:"+getNumberOfBalls());
-							var node2 = document.createTextNode("your first color is(5 points):"+getFirstColor());
-							var node3 = document.createTextNode("your second color is(15 points)::"+getSecondColor());
-							var node4 = document.createTextNode("your third color is(25 points):"+getThirdColor());
-							var node5 = document.createTextNode(("your game time is:"+getGameTime()));
-							var node6 = document.createTextNode("your number of monsters is:"+getNumberOfMonsters());
-							var node7 = document.createTextNode("your up key is:"+getUpKey());
-							var node8 = document.createTextNode("your down key is:"+getDownKey());
-							var node9 = document.createTextNode("your left key is:"+getLeftKey());
-							var node10= document.createTextNode("your right key is:"+getRightKey());
-							var nodeBr1 = document.createElement("br");
-							var nodeBr2 = document.createElement("br");
-							var nodeBr3 = document.createElement("br");
-							var nodeBr4 = document.createElement("br");
-							var nodeBr5 = document.createElement("br");
-							var nodeBr6 = document.createElement("br");
-							var nodeBr7 = document.createElement("br");
-							var nodeBr8 = document.createElement("br");
-							var nodeBr9 = document.createElement("br");
-							var nodeBr10 = document.createElement("br");
-							p1.appendChild(node1);
-							p1.appendChild(nodeBr1);
-							p1.appendChild(node2);
-							p1.appendChild(nodeBr2);
-							p1.appendChild(node3);
-							p1.appendChild(nodeBr3);
-							p1.appendChild(node4);
-							p1.appendChild(nodeBr4);
-							p1.appendChild(node5);
-							p1.appendChild(nodeBr5);
-							p1.appendChild(node6);
-							p1.appendChild(nodeBr6);
-							p1.appendChild(node7);
-							p1.appendChild(nodeBr7);
-							p1.appendChild(node8);
-							p1.appendChild(nodeBr8);
-							p1.appendChild(node9);
-							p1.appendChild(nodeBr9);
-							p1.appendChild(node10);
-							p1.appendChild(nodeBr10);
-							h1.appendChild(titleText);
-							settingsDitails.appendChild(h1);
-							settingsDitails.appendChild(p1);
-							initialize(getUpKey(),getDownKey(),getLeftKey(),getRightKey(),getNumberOfBalls(),getFirstColor(),getSecondColor(),getThirdColor(),getGameTime(),getNumberOfMonsters());
-							playMusic();
-							startGame();
-						}
+						alert("successfully signed in, you are moving to game settings")
+						settingClick();
+						 currentUserName=inputUsername.value;
+						// var x = document.getElementById('login');
+						// if (x.style.display === 'none') {
+						// 	x.style.display = 'block';
+						// } else {
+						// 	x.style.display = 'none';
+						// 	var y = document.getElementById('game');
+						// 	y.style.display='block';
+						// 	var settingsDitails=document.getElementById("settingDetailsInGame");
+						// 	var p1 = document.createElement("p");
+						// 	var h1 = document.createElement("h1");
+						// 	var titleText = document.createTextNode("hello "+ currentUserName);
+						// 	var node1 = document.createTextNode("your number of balls is:"+getNumberOfBalls());
+						// 	var node2 = document.createTextNode("your first color is(5 points):"+getFirstColor());
+						// 	var node3 = document.createTextNode("your second color is(15 points)::"+getSecondColor());
+						// 	var node4 = document.createTextNode("your third color is(25 points):"+getThirdColor());
+						// 	var node5 = document.createTextNode(("your game time is:"+getGameTime()));
+						// 	var node6 = document.createTextNode("your number of monsters is:"+getNumberOfMonsters());
+						// 	var node7 = document.createTextNode("your up key is:"+getUpKey());
+						// 	var node8 = document.createTextNode("your down key is:"+getDownKey());
+						// 	var node9 = document.createTextNode("your left key is:"+getLeftKey());
+						// 	var node10= document.createTextNode("your right key is:"+getRightKey());
+						// 	var nodeBr1 = document.createElement("br");
+						// 	var nodeBr2 = document.createElement("br");
+						// 	var nodeBr3 = document.createElement("br");
+						// 	var nodeBr4 = document.createElement("br");
+						// 	var nodeBr5 = document.createElement("br");
+						// 	var nodeBr6 = document.createElement("br");
+						// 	var nodeBr7 = document.createElement("br");
+						// 	var nodeBr8 = document.createElement("br");
+						// 	var nodeBr9 = document.createElement("br");
+						// 	var nodeBr10 = document.createElement("br");
+						// 	p1.appendChild(node1);
+						// 	p1.appendChild(nodeBr1);
+						// 	p1.appendChild(node2);
+						// 	p1.appendChild(nodeBr2);
+						// 	p1.appendChild(node3);
+						// 	p1.appendChild(nodeBr3);
+						// 	p1.appendChild(node4);
+						// 	p1.appendChild(nodeBr4);
+						// 	p1.appendChild(node5);
+						// 	p1.appendChild(nodeBr5);
+						// 	p1.appendChild(node6);
+						// 	p1.appendChild(nodeBr6);
+						// 	p1.appendChild(node7);
+						// 	p1.appendChild(nodeBr7);
+						// 	p1.appendChild(node8);
+						// 	p1.appendChild(nodeBr8);
+						// 	p1.appendChild(node9);
+						// 	p1.appendChild(nodeBr9);
+						// 	p1.appendChild(node10);
+						// 	p1.appendChild(nodeBr10);
+						// 	h1.appendChild(titleText);
+						// 	settingsDitails.appendChild(h1);
+						// 	settingsDitails.appendChild(p1);
+						// 	initialize(getUpKey(),getDownKey(),getLeftKey(),getRightKey(),getNumberOfBalls(),getFirstColor(),getSecondColor(),getThirdColor(),getGameTime(),getNumberOfMonsters());
+						// 	playMusic();
+						// 	startGame();
+						// }
 					}
 					else{
 						alert("you don't have an account, please register")
@@ -827,6 +838,7 @@
 	}
 
 	function loginClick() {
+		setDefaultUser();
 		stopGame();
 		var welcomeDiv = document.getElementById('welcome')
 		var registerDiv = document.getElementById('register');
@@ -851,6 +863,7 @@
 
 	function registerClick() {
 		stopGame();
+		setDefaultUser();
 		var welcomeDiv = document.getElementById('welcome')
 		var loginDiv = document.getElementById('login');
 		var settingDiv = document.getElementById('setting');
@@ -882,7 +895,87 @@
 		initialize(getUpKey(),getDownKey(),getLeftKey(),getRightKey(),getNumberOfBalls(),getFirstColor(),getSecondColor(),getThirdColor(),getGameTime(),getNumberOfMonsters());
 		startGame();
 	}
-
+	function setDefaultUser() {
+		if (localStorage.getItem("p") === null) {
+			localStorage.setItem("p", "p");
+		}
+	}
+	function goToGame() {
+		var settingsDiv = document.getElementById('setting');
+		var registerDiv = document.getElementById('register');
+		var loginDiv = document.getElementById('login');
+		if(settingsDiv.style.display!=='none'){
+			settingsDiv.style.display='none';
+		}
+		if(registerDiv.style.display!=='none'){
+			registerDiv.style.display='none';
+		}
+		if (loginDiv.style.display === 'none') {
+			loginDiv.style.display = 'none';
+		}
+		var y = document.getElementById('game');
+		y.style.display='block';
+		var settingsDitails=document.getElementById("settingDetailsInGame");
+		var titleToRemove=document.getElementById("h1");
+		if(titleToRemove!==null){
+			titleToRemove.remove();
+		}
+		var paragraphToRemove=document.getElementById("p1");
+		if(paragraphToRemove!==null){
+			paragraphToRemove.remove();
+		}
+		var p1 = document.createElement("p");
+		p1.setAttribute("id", "p1");
+		var h1 = document.createElement("h1");
+		h1.setAttribute("id","h1");
+		var titleText = document.createTextNode("hello "+ currentUserName);
+		var node1 = document.createTextNode("your number of balls is:"+getNumberOfBalls());
+		var node2 = document.createTextNode("your first color is(5 points):"+getFirstColor());
+		var node3 = document.createTextNode("your second color is(15 points)::"+getSecondColor());
+		var node4 = document.createTextNode("your third color is(25 points):"+getThirdColor());
+		var node5 = document.createTextNode(("your game time is:"+getGameTime()));
+		var node6 = document.createTextNode("your number of monsters is:"+getNumberOfMonsters());
+		var node7 = document.createTextNode("your up key is:"+getUpKey());
+		var node8 = document.createTextNode("your down key is:"+getDownKey());
+		var node9 = document.createTextNode("your left key is:"+getLeftKey());
+		var node10= document.createTextNode("your right key is:"+getRightKey());
+		var nodeBr1 = document.createElement("br");
+		var nodeBr2 = document.createElement("br");
+		var nodeBr3 = document.createElement("br");
+		var nodeBr4 = document.createElement("br");
+		var nodeBr5 = document.createElement("br");
+		var nodeBr6 = document.createElement("br");
+		var nodeBr7 = document.createElement("br");
+		var nodeBr8 = document.createElement("br");
+		var nodeBr9 = document.createElement("br");
+		var nodeBr10 = document.createElement("br");
+		p1.appendChild(node1);
+		p1.appendChild(nodeBr1);
+		p1.appendChild(node2);
+		p1.appendChild(nodeBr2);
+		p1.appendChild(node3);
+		p1.appendChild(nodeBr3);
+		p1.appendChild(node4);
+		p1.appendChild(nodeBr4);
+		p1.appendChild(node5);
+		p1.appendChild(nodeBr5);
+		p1.appendChild(node6);
+		p1.appendChild(nodeBr6);
+		p1.appendChild(node7);
+		p1.appendChild(nodeBr7);
+		p1.appendChild(node8);
+		p1.appendChild(nodeBr8);
+		p1.appendChild(node9);
+		p1.appendChild(nodeBr9);
+		p1.appendChild(node10);
+		p1.appendChild(nodeBr10);
+		h1.appendChild(titleText);
+		settingsDitails.appendChild(h1);
+		settingsDitails.appendChild(p1);
+		initialize(getUpKey(),getDownKey(),getLeftKey(),getRightKey(),getNumberOfBalls(),getFirstColor(),getSecondColor(),getThirdColor(),getGameTime(),getNumberOfMonsters());
+		playMusic();
+		startGame();
+	}
 </script>
 <!--   Free Website Template by t o o p l a t e . c o m   -->
 </body>
