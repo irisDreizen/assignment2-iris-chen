@@ -87,8 +87,8 @@
 				</div>
 
 				<img id="ghost" src="images/monster2.png" alt="" style="display: none"/>
-				<img id="sucaria" src="images/candy.png" alt="" style="display: none"/>
-				<img id="minion" src="images/minion.png" alt="" style="display: none"/>
+				<img id="sucaria" src="images/names.png" alt="" style="display: none"/>
+				<img id="minion" src="images/names.png" alt="" style="display: none"/>
 
 
 			</div>
@@ -249,11 +249,11 @@
 					<input id="numOfMonsters" name="numOfMonsters1" type="text">
 					<br>
 					<br>
-					<button class="myButton" onclick="updateFunction()">update</button>        <button class="myButton" onclick="enterRandomValues()">random values</button>
+					<button class="myButton" >update</button>     </form>   <button class="myButton" onclick="enterRandomValues()">random values</button>
 					<br>
 					<br>
 
-				</form>
+
 			</div>
 
 
@@ -650,7 +650,7 @@
 		// Make sure the form is submitted to the destination defined
 		// in the "action" attribute of the form when valid
 		submitHandler: function() {
-			//updateFunction();
+			updateFunction();
 		}
 	});
 
